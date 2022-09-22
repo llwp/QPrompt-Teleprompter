@@ -24,7 +24,7 @@ import QtQuick 2.12
 import Qt.labs.settings 1.0
 //import QtQuick.Dialogs
 import Qt.labs.platform 1.1 as Labs
-//import org.kde.kirigami 2.11 as Kirigami
+import com.cuperino.qprompt.abstractunits 1.0
 
 Rectangle {
     id: prompterBackground
@@ -60,7 +60,7 @@ Rectangle {
 
     anchors.fill: parent
     color: backgroundColor
-    opacity: /*parent.toolbar.opacitySlider.pressed || projectionManager.isPreview ? */parent.toolbar.opacitySlider.value/100 /*: 1 */
+    opacity: /*editorToolbar.opacitySlider.pressed || projectionManager.isPreview ? */editorToolbar.opacitySlider.value/100 /*: 1 */
 
     Settings {
         id: backgroundSettings
@@ -139,7 +139,7 @@ Rectangle {
     Behavior on opacity {
         enabled: true
         animation: NumberAnimation {
-            duration: Kirigami.Units.longDuration
+            duration: Units.LongDuration
             easing.type: Easing.OutQuad
         }
     }

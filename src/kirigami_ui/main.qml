@@ -41,6 +41,7 @@ Kirigami.ApplicationWindow {
     //readonly property bool __translucidBackground: !Material.background.a // === 0
     //readonly property bool __translucidBackground: !Kirigami.Theme.backgroundColor.a && ['ios', 'wasm', 'tvos', 'qnx', 'ipados'].indexOf(Qt.platform.os)===-1
     property bool __translucidBackground: true
+    readonly property bool __isMobile: Kirigami.Settings.isMobile
     readonly property bool themeIsMaterial: Kirigami.Settings.style==="Material" // || Kirigami.Settings.isMobile
     // mobileOrSmallScreen helps determine when to follow mobile behaviors from desktop non-mobile devices
     readonly property bool mobileOrSmallScreen: Kirigami.Settings.isMobile || root.width < 1220
@@ -119,7 +120,7 @@ Kirigami.ApplicationWindow {
     background: Rectangle {
         id: appTheme
         color: __backgroundColor
-        opacity: root.pageStack.layers.depth > 1 || (!root.__translucidBackground || root.pageStack.currentItem.prompterBackground.opacity===1)
+        opacity: (root.pageStack.layers.depth > 1 || (!root.__translucidBackground || root.pageStack.currentItem.prompterBackground.opacity===1)) ? 1.0 : 0.0
         //readonly property color __fontColor: parent.Material.theme===Material.Light ? "#212121" : "#fff"
         //readonly property color __iconColor: parent.Material.theme===Material.Light ? "#232629" : "#c3c7d1"
         //readonly property color __backgroundColor: __translucidBackground ? (parent.Material.theme===Material.Dark ? "#303030" : "#fafafa") : Kirigami.Theme.backgroundColor
@@ -772,7 +773,9 @@ Kirigami.ApplicationWindow {
         MouseArea {
             anchors.fill: parent
             acceptedButtons: Qt.NoButton
-            onWheel: (wheel)=>root.pageStack.currentItem.viewport.mouse.wheel(wheel)
+            onWheel: function (wheel) {
+                root.pageStack.currentItem.viewport.mouse.wheel(wheel)
+            }
         }
     }
     MouseArea {
@@ -780,7 +783,9 @@ Kirigami.ApplicationWindow {
         anchors.left: parent.left
         anchors.right: parent.right
         acceptedButtons: Qt.NoButton
-        onWheel: (wheel)=>root.pageStack.currentItem.viewport.mouse.wheel(wheel)
+        onWheel: function (wheel) {
+            root.pageStack.currentItem.viewport.mouse.wheel(wheel)
+        }
     }
 
     // Top bar foreground hack for window dragging
@@ -843,29 +848,15 @@ Kirigami.ApplicationWindow {
         value: root.italic
     }*/
 
-    property int q: 0
     onFrameSwapped: {
-        // Check that state is not prompting and editor isn't active.
-        // In this implementation we can't detect moving past marker while the editor is active because this feature shares its cursor as a means of detection.
-        if (parseInt(root.pageStack.currentItem.prompter.state)===Prompter.States.Prompting && !root.pageStack.currentItem.editor.focus) {
-            // Detect when moving past a marker.
-            // I'm doing this here because there's no event that occurs on each bit of scroll, and this takes much less CPU than a timer, is more precise and scales better.
-            root.pageStack.currentItem.prompter.setCursorAtCurrentPosition()
-            const m = root.pageStack.currentItem.document.previousMarker(root.pageStack.currentItem.editor.cursorPosition)
-            root.pageStack.currentItem.editor.cursorPosition = m.position
-            // Here, p is for position
-            const p = root.pageStack.currentItem.editor.cursorRectangle.y
-            //if (q < p) {
-                //console.log(m.url);
-            //}
-            q = p;
-        }
+        // Thus runs from here because there's no event that occurs on each bit of scroll, and this takes much less CPU than a timer, is more precise and scales better.
+        root.pageStack.currentItem.prompter.markerCompare()
         // Update Projections
         if (projectionManager.isEnabled && root.visible/* && projectionManager.model.count*/)
             // Recount projections on each for loop iteration to prevent value from going stale because a window was closed from a different thread.
             for (var i=0; i<projectionManager.projections.count; i++) {
                 const w = projectionManager.projections.objectAt(i)
-                if (w/*!==null*/)
+                if (w!==null)
                     w.update();
                 else
                     break;

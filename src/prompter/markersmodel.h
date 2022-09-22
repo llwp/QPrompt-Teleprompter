@@ -49,7 +49,7 @@ Q_DECLARE_METATYPE(Marker)
 class MarkersModel : public QAbstractListModel
 {
     Q_OBJECT
-
+    //QML_ELEMENT
 public:
     enum Roles {
         TextRole = Qt::UserRole,

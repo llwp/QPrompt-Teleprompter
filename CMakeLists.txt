@@ -58,6 +58,9 @@ set(KF_MIN_VERSION 5.68.0)
 if (APPLE)
     set(APPLE_SUPPRESS_X11_WARNING ON)
 endif()
+set(QML_IMPORT_NAME "QPrompt")
+set(QML_IMPORT_MAJOR_VERSION 1)
+
 # ------------------------- BEGIN: lists to maintain manually -------------------------
 
 # Directories where Qt Creator can find QML files of Kirigami etc. on your system.
