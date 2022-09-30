@@ -23,6 +23,7 @@ import QtQuick 2.12
 
 import Qt.labs.settings 1.0
 import Qt.labs.platform 1.1 as Labs
+import QtQuick.Controls.Material 2.15
 import com.cuperino.qprompt.abstractunits 1.0
 
 Rectangle {
@@ -38,7 +39,7 @@ Rectangle {
     //property color backgroundColor: root.background.selection ? root.background.__backgroundColor : "#FFFFFF" //: "#FFFFFF"
 
     // property color backgroundColor: "#303030"
-    property color backgroundColor: switch(root.background.selection) {
+    property color backgroundColor: switch(appTheme.selection) {
         //case 0: root.background.__backgroundColor
         //case 0: return Qt.rgba(Material.background.r/4, Material.background.g/4, Material.background.b/4, 1);
         //case 0: return Qt.rgb(Material.background.r/4, Material.background.g/4, Material.background.b/4);
@@ -111,7 +112,7 @@ Rectangle {
         Labs.ColorDialog {
             id: backgroundColorDialog
             // showAlphaChannel: false
-            currentColor: root.background.__backgroundColor
+            currentColor: appTheme.__backgroundColor
             onAccepted: {
                 console.log(color)
                 prompterBackground.backgroundColor = color
