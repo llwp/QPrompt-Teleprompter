@@ -142,7 +142,6 @@ if(ANDROID)
     )
     find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
         Kirigami2
-        I18n
         CoreAddons
     )
 elseif(WASM OR IOS)
@@ -158,7 +157,6 @@ elseif(WASM OR IOS)
     )
     find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
         Kirigami2
-        I18n
         CoreAddons
     )
 elseif(HAIKU)
@@ -178,7 +176,6 @@ elseif(HAIKU)
     )
     find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
         Kirigami2
-        I18n
         CoreAddons
         IconThemes
     )
@@ -201,7 +198,6 @@ elseif(WIN32 OR APPLE)
     )
     find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
         Kirigami2
-        I18n
         CoreAddons
     )
     find_package(KF5Crash ${KF_MIN_VERSION} COMPONENTS)
@@ -236,7 +232,6 @@ else()
     #)
     find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
         Kirigami2
-        I18n
         CoreAddons
         IconThemes
     )
@@ -267,7 +262,6 @@ include(FeatureSummary)
 
 #add_subdirectory("3rdparty/extra-cmake-modules" build/ecm)
 #add_subdirectory("3rdparty/kirigami" build/kirigami)
-#add_subdirectory("3rdparty/ki18n" build/ki18n)
 #add_subdirectory("3rdparty/breeze-icons" build/icons)
 #add_subdirectory("3rdparty/calligra/filters/libmsooxml" build/libmsooxml)
 
@@ -309,7 +303,6 @@ list(APPEND DOCS ${LICENSE_FILE} ${README_FILE} ${DESCRIPTION_FILE} "COPYING.ASS
 set(DOC_INSTALL_DIR "doc/qprompt")
 
 add_subdirectory(src build)
-ki18n_install(po)
 
 if (WIN32 OR UNIX) # AND NOT ANDROID
     install(FILES com.cuperino.qprompt.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
@@ -333,12 +326,12 @@ if(UNIX AND NOT ANDROID)
     set(CPACK_DEBIAN_PACKAGE_SECTION "Multimedia")
     set(CPACK_DEBIAN_COMPRESSION_TYPE ${COMPRESION_TYPE})
     # Set to dependencies as Debian 11 and Ubuntu 21.04. Chose these two distros as base because Desktop version has ARM support and provided Qt versions require no backporting.
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt5svg5 (>= 5.15.2), libqt5x11extras5 (>= 5.15.2), qml-module-qt-labs-platform (>=5.15.2), qml-module-qtqml (>=5.15.2), qml-module-qtqml-models2 (>=5.15.2), qml-module-qtqml-statemachine (>=5.15.2), qml-module-qtquick-controls (>=5.15.2), qml-module-qtquick-controls2 (>=5.15.2), qml-module-qtquick-dialogs (>=5.15.2), qml-module-qtquick-shapes (>=5.15.2), qml-module-org-kde-kirigami2 (>=5.78.0), libkf5i18n5 (>= 5.78.0), libkf5coreaddons5 (>= 5.78.0), libkf5crash5 (>= 5.78.0)")
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt5svg5 (>= 5.15.2), libqt5x11extras5 (>= 5.15.2), qml-module-qt-labs-platform (>=5.15.2), qml-module-qtqml (>=5.15.2), qml-module-qtqml-models2 (>=5.15.2), qml-module-qtqml-statemachine (>=5.15.2), qml-module-qtquick-controls (>=5.15.2), qml-module-qtquick-controls2 (>=5.15.2), qml-module-qtquick-dialogs (>=5.15.2), qml-module-qtquick-shapes (>=5.15.2), qml-module-org-kde-kirigami2 (>=5.78.0), libkf5coreaddons5 (>= 5.78.0), libkf5crash5 (>= 5.78.0)")
 
     # CPACK: RPM Specific Settings
     set(CPACK_RPM_PACKAGE_LICENSE "GPLv3")
     set(CPACK_RPM_PACKAGE_GROUP "Multimedia/Video")
-    set(CPACK_RPM_PACKAGE_REQUIRES "qt5-qtbase >= 5.15.2, qt5-qtx11extras >= 5.15.2, qt5-qtbase-gui >= 5.15.2, qt5-qtdeclarative >= 5.15.2, qt5-qtsvg >= 5.15.2, qt5-qtquickcontrols >= 5.15.2, qt5-qtquickcontrols2 >= 5.15.2, kf5-ki18n >= 5.73.0, kf5-kirigami2 >= 5.73.0, kf5-kcoreaddons >= 5.73.0, kf5-kcrash >= 5.73.0")
+    set(CPACK_RPM_PACKAGE_REQUIRES "qt5-qtbase >= 5.15.2, qt5-qtx11extras >= 5.15.2, qt5-qtbase-gui >= 5.15.2, qt5-qtdeclarative >= 5.15.2, qt5-qtsvg >= 5.15.2, qt5-qtquickcontrols >= 5.15.2, qt5-qtquickcontrols2 >= 5.15.2, kf5-kirigami2 >= 5.73.0, kf5-kcoreaddons >= 5.73.0, kf5-kcrash >= 5.73.0")
     set(CPACK_RPM_COMPRESSION_TYPE ${COMPRESION_TYPE})
 
 elseif(WIN32)

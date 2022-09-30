@@ -180,14 +180,14 @@ Kirigami.ApplicationWindow {
         }
         actions: [
             Kirigami.Action {
-                text: i18nc("Main menu and global menu actions", "&New")
+                text: qsTr("&New", "Main menu and global menu actions")
                 //iconName: "document-new"
                 iconSource: "qrc:/icons/document-new.svg"
                 shortcut: StandardKey.New
                 onTriggered: root.pageStack.currentItem.document.newDocument()
             },
             Kirigami.Action {
-                text: i18nc("Main menu and global menu actions", "&Open")
+                text: qsTr("&Open", "Main menu and global menu actions")
                 //iconName: "document-open"
                 iconSource: "qrc:/icons/document-open.svg"
                 shortcut: StandardKey.Open
@@ -197,7 +197,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18nc("Main menu and global menu actions", "&Save")
+                text: qsTr("&Save", "Main menu and global menu actions")
                 //iconName: "document-save"
                 iconSource: "qrc:/icons/document-save.svg"
                 shortcut: StandardKey.Save
@@ -207,7 +207,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18nc("Main menu and global menu actions", "Save &As")
+                text: qsTr("Save &As", "Main menu and global menu actions")
                 //iconName: "document-save-as"
                 iconSource: "qrc:/icons/document-save-as.svg"
                 shortcut: StandardKey.SaveAs
@@ -218,34 +218,34 @@ Kirigami.ApplicationWindow {
             },
             Kirigami.Action {
                 visible: false
-                text: i18nc("Main menu actions", "&Recent Files")
+                text: qsTr("&Recent Files", "Main menu actions")
                 //iconName: "document-open-recent"
                 iconSource: "qrc:/icons/document-open-recent.svg"
                 //Kirigami.Action {
-                    //text: i18n("View Action 1")
-                    //onTriggered: showPassiveNotification(i18n("View Action 1 clicked"))
+                    //text: qsTr("View Action 1")
+                    //onTriggered: showPassiveNotification(qsTr("View Action 1 clicked"))
                 //}
             },
             Kirigami.Action {
-                text: i18nc("Main menu actions. Menu regarding input settings.", "&Controls Settings")
+                text: qsTr("&Controls Settings", "Main menu actions. Menu regarding input settings.")
                 //iconName: "transform-browse" // "hand"
                 iconSource: "qrc:/icons/transform-browse.svg"
                 Kirigami.Action {
                     visible: ["android", "ios", "tvos", "ipados", "qnx"].indexOf(Qt.platform.os)===-1
-                    text: i18nc("Main menu and global menu actions. Opens dialog to configure keyboard inputs.", "Keyboard Inputs")
+                    text: qsTr("Keyboard Inputs", "Main menu and global menu actions. Opens dialog to configure keyboard inputs.")
                     //iconName: "key-enter" // "keyboard"
                     iconSource: "qrc:/icons/key-enter.svg"
                     onTriggered: root.pageStack.currentItem.key_configuration_overlay.open()
                 }
                 Kirigami.Action {
                     visible: ["android", "ios", "tvos", "ipados", "qnx"].indexOf(Qt.platform.os)===-1
-                    text: i18nc("Open 'scroll settings' from main menu and global menu actions", "Scroll throttle settings")
+                    text: qsTr("Scroll throttle settings", "Open 'scroll settings' from main menu and global menu actions")
                     //iconName: "gnumeric-object-scrollbar" // "keyboard"
                     iconSource: "qrc:/icons/gnumeric-object-scrollbar.svg"
                     onTriggered: wheelSettings.open()
                 }
                 Kirigami.Action {
-                    text: i18nc("Main menu and global menu actions. Have up arrow behave like down arrow and vice versa while prompting.", "Invert &arrow keys")
+                    text: qsTr("Invert &arrow keys", "Main menu and global menu actions. Have up arrow behave like down arrow and vice versa while prompting.")
                     enabled: !root.__noScroll
                     //iconName: "circular-arrow-shape"
                     iconSource: "qrc:/icons/circular-arrow-shape.svg"
@@ -254,7 +254,7 @@ Kirigami.ApplicationWindow {
                     onTriggered: root.__invertArrowKeys = !root.__invertArrowKeys
                 }
                 Kirigami.Action {
-                    text: i18nc("Main menu and global menu actions. Invert scroll direction while prompting.", "Invert &scroll direction")
+                    text: qsTr("Invert &scroll direction", "Main menu and global menu actions. Invert scroll direction while prompting.")
                     enabled: !root.__noScroll
                     //iconName: "gnumeric-object-scrollbar"
                     iconSource: "qrc:/icons/gnumeric-object-scrollbar.svg"
@@ -263,17 +263,17 @@ Kirigami.ApplicationWindow {
                     onTriggered: root.__invertScrollDirection = !root.__invertScrollDirection
                 }
                 Kirigami.Action {
-                    text: i18nc("Main menu and global menu actions. Have touchpad and mouse wheel scrolling adjust velocity instead of scrolling like most other apps.", "Use scroll as velocity &dial")
+                    text: qsTr("Use scroll as velocity &dial", "Main menu and global menu actions. Have touchpad and mouse wheel scrolling adjust velocity instead of scrolling like most other apps.")
                     enabled: !root.__noScroll
                     //iconName: "filename-bpm-amarok"
                     iconSource: "qrc:/icons/filename-bpm-amarok.svg"
-                    // ToolTip.text: i18n("Use mouse and touchpad scroll as speed dial while prompting")
+                    // ToolTip.text: qsTr("Use mouse and touchpad scroll as speed dial while prompting")
                     checkable: true
                     checked: root.__scrollAsDial
                     onTriggered: root.__scrollAsDial = !root.__scrollAsDial
                 }
                 Kirigami.Action {
-                    text: i18nc("Main menu and global menu actions. Touchpad scrolling and mouse wheel use have no effect while prompting.", "Disable scrolling while prompting")
+                    text: qsTr("Disable scrolling while prompting", "Main menu and global menu actions. Touchpad scrolling and mouse wheel use have no effect while prompting.")
                     //iconName: "paint-none"
                     iconSource: "qrc:/icons/paint-none.svg"
                     checkable: true
@@ -282,11 +282,11 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18nc("Main menu actions", "Other &Settings")
+                text: qsTr("Other &Settings", "Main menu actions")
                 //iconName: "configure"
                 iconSource: "qrc:/icons/configure.svg"
 //                 Kirigami.Action {
-//                     text: i18n("Telemetry")
+//                     text: qsTr("Telemetry")
 //                     //iconName: "document-send"
 //                     onTriggered: {
 //                         root.loadTelemetryPage()
@@ -294,7 +294,7 @@ Kirigami.ApplicationWindow {
 //                 }
                 Kirigami.Action {
                     id: hideFormattingToolsAlwaysSetting
-                    text: i18nc("Main menu actions", "Always hide formatting tools")
+                    text: qsTr("Always hide formatting tools", "Main menu actions")
                     //iconName: "newline"
                     iconSource: "qrc:/icons/newline.svg"
                     checkable: true
@@ -304,7 +304,7 @@ Kirigami.ApplicationWindow {
                 Kirigami.Action {
                     id: hideFormattingToolsWhilePromptingSetting
                     enabled: !hideFormattingToolsAlwaysSetting.checked
-                    text: i18nc("Main menu actions. Hides formatting tools while not in edit mode.", "Auto hide formatting tools")
+                    text: qsTr("Auto hide formatting tools", "Main menu actions. Hides formatting tools while not in edit mode.")
                     //iconName: "list-remove"
                     iconSource: "qrc:/icons/list-remove.svg"
                     checkable: true
@@ -313,7 +313,7 @@ Kirigami.ApplicationWindow {
                 }
                 Kirigami.Action {
                     id: enableOverlayContrastSetting
-                    text: i18nc("Main menu actions. Disables contrast effect for the reading region overlay.", "Disable overlay contrast")
+                    text: qsTr("Disable overlay contrast", "Main menu actions. Disables contrast effect for the reading region overlay.")
                     //iconName: "edit-opacity"
                     iconSource: "qrc:/icons/edit-opacity.svg"
                     checkable: true
@@ -324,7 +324,7 @@ Kirigami.ApplicationWindow {
                     id: transparencySetting
                     property bool dirty: false
                     visible: ["android", "ios", "tvos", "ipados", "qnx"].indexOf(Qt.platform.os)===-1
-                    text: i18n("Disable background transparency")
+                    text: qsTr("Disable background transparency")
                     //iconName: "contrast"
                     iconSource: "qrc:/icons/contrast.svg"
                     checkable: true
@@ -339,7 +339,7 @@ Kirigami.ApplicationWindow {
                 }
                 Kirigami.Action {
                     id: subpixelSetting
-                    text: i18nc("Main menu actions. QPrompt switches between two text rendering techniques when the base font size exceeds 120px. Enabling this option forces QPrompt to always use the default renderer, which features smoother sub-pixel animations.", "Force sub-pixel text renderer past 120px")
+                    text: qsTr("Force sub-pixel text renderer past 120px", "Main menu actions. QPrompt switches between two text rendering techniques when the base font size exceeds 120px. Enabling this option forces QPrompt to always use the default renderer, which features smoother sub-pixel animations.")
                     // Hiding option because only Qt text renderer is used on devices of greater pixel density, due to bug in rendering native fonts while scaling is enabled.
                     visible: ['android', 'ios', 'wasm', 'tvos', 'qnx', 'ipados'].indexOf(Qt.platform.os)===-1 && screen.devicePixelRatio === 1.0
                     //iconName: "format-font-size-more"
@@ -349,23 +349,23 @@ Kirigami.ApplicationWindow {
                     onTriggered: root.forceQtTextRenderer = !root.forceQtTextRenderer
                 }
 //                 Kirigami.Action {
-//                     text: i18nc("Main menu actions", "Restore factory defaults")
+//                     text: qsTr("Restore factory defaults", "Main menu actions")
 //                     //iconName: "edit-clear-history"
 //                     iconSource: "qrc:/icons/edit-clear-history.svg"
 //                     onTriggered: {
-//                         showPassiveNotification(i18n("Feature not yet implemented"))
+//                         showPassiveNotification(qsTr("Feature not yet implemented"))
 //                     }
 //                 }
             },
             Kirigami.Action {
-                text: i18nc("Main menu actions. Load about page.", "Abou&t %1", aboutData.displayName)
+                text: qsTr("Abou&t %1", "Main menu actions. Load about page.").arg(aboutData.displayName)
                 //iconName: "help-about"
                 iconSource: "qrc:/icons/help-about.svg"
                 onTriggered: loadAboutPage()
             },
             Kirigami.Action {
                 visible: !Kirigami.Settings.isMobile
-                text: i18nc("Main menu and global menu actions", "&Quit")
+                text: qsTr("&Quit", "Main menu and global menu actions")
                 //iconName: "application-exit"
                 iconSource: "qrc:/icons/application-exit.svg"
                 shortcut: StandardKey.Quit
@@ -416,7 +416,7 @@ Kirigami.ApplicationWindow {
         ]
         topContent: RowLayout {
             Button {
-                text: i18nc("Main menu and global actions. Load document that welcomes users.", "Load &Welcome")
+                text: qsTr("Load &Welcome", "Main menu and global actions. Load document that welcomes users.")
                 flat: true
                 onClicked: {
                     root.pageStack.currentItem.document.loadGuide()
@@ -424,7 +424,7 @@ Kirigami.ApplicationWindow {
                 }
             }
             // Button {
-            //     text: i18nc("Main menu and global actions.", "Remote")
+            //     text: qsTr("Remote", "Main menu and global actions.")
             //     flat: true
             //     onClicked: {
             //         root.pageStack.layers.push(remoteControlPageComponent, {})
@@ -433,7 +433,7 @@ Kirigami.ApplicationWindow {
             // }
             // Button {
             //     id: themeSwitch
-            //     text: i18nc("Main menu and global actions.", "Dark &Mode")
+            //     text: qsTr("Dark &Mode", "Main menu and global actions.")
             //     flat: true
             //     onClicked: {
             //         appTheme.selection = (appTheme.selection + 1) % 3;
@@ -442,7 +442,7 @@ Kirigami.ApplicationWindow {
             //         // If the system theme is active, and its background is either black or the exact same as that of either the material light o dark theme's, skip the system theme.
             //         if (appTheme.selection===0 && (Qt.colorEqual(bg, "#000000") || Qt.colorEqual(bg, "#FAFAFA") || Qt.colorEqual(bg, "#303030")))
             //             appTheme.selection = (appTheme.selection + 1) % 3
-            //         showPassiveNotification(i18n("Feature not fully implemented"))
+            //         showPassiveNotification(qsTr("Feature not fully implemented"))
             //     }
             // }
         }
@@ -452,7 +452,7 @@ Kirigami.ApplicationWindow {
                     const date = new Date();
                     return ee || date.getMonth()===4 && date.getDate()===4
                 }
-                text: i18n("Darth mode")
+                text: qsTr("Darth mode")
                 flat: true
                 checkable: true
                 checked: root.theforce
@@ -473,161 +473,161 @@ Kirigami.ApplicationWindow {
         window: root
         menus: [
         Labs.Menu {
-            title: i18nc("Global menu actions", "&File")
+            title: qsTr("&File", "Global menu actions")
             
             Labs.MenuItem {
-                text: i18nc("Main menu and global menu actions", "&New")
+                text: qsTr("&New", "Main menu and global menu actions")
                 onTriggered: root.pageStack.currentItem.document.newDocument()
             }
             Labs.MenuItem {
-                text: i18nc("Main menu and global menu actions", "&Open")
+                text: qsTr("&Open", "Main menu and global menu actions")
                 onTriggered: root.pageStack.currentItem.document.open()
             }
             Labs.MenuItem {
-                text: i18nc("Main menu and global menu actions", "&Save")
+                text: qsTr("&Save", "Main menu and global menu actions")
                 onTriggered: root.pageStack.currentItem.document.saveDialog()
             }
             Labs.MenuItem {
-                text: i18nc("Main menu and global menu actions", "Save &As…")
+                text: qsTr("Save &As…", "Main menu and global menu actions")
                 onTriggered: root.pageStack.currentItem.document.saveAsDialog()
             }
             Labs.MenuSeparator { }
             Labs.MenuItem {
-                text: i18nc("Main menu and global menu actions", "&Quit")
+                text: qsTr("&Quit", "Main menu and global menu actions")
                 onTriggered: close()
             }
         },
         
         Labs.Menu {
-            title: i18nc("Global menu actions", "&Edit")
+            title: qsTr("&Edit", "Global menu actions")
             
             Labs.MenuItem {
-                text: i18nc("Global menu actions", "&Undo")
+                text: qsTr("&Undo", "Global menu actions")
                 enabled: root.pageStack.currentItem.editor.canUndo
                 onTriggered: root.pageStack.currentItem.editor.undo()
             }
             Labs.MenuItem {
-                text: i18nc("Global menu actions", "&Redo")
+                text: qsTr("&Redo", "Global menu actions")
                 enabled: root.pageStack.currentItem.editor.canRedo
                 onTriggered: root.pageStack.currentItem.editor.redo()
             }
             Labs.MenuSeparator { }
             Labs.MenuItem {
-                text: i18nc("Global menu and editor context menu actions", "&Copy")
+                text: qsTr("&Copy", "Global menu and editor context menu actions")
                 enabled: root.pageStack.currentItem.editor.selectedText
                 onTriggered: root.pageStack.currentItem.editor.copy()
             }
             Labs.MenuItem {
-                text: i18nc("Global menu and editor context menu actions", "Cu&t")
+                text: qsTr("Cu&t", "Global menu and editor context menu actions")
                 enabled: root.pageStack.currentItem.editor.selectedText
                 onTriggered: root.pageStack.currentItem.editor.cut()
             }
             Labs.MenuItem {
-                text: i18nc("Global menu and editor context menu actions", "&Paste")
+                text: qsTr("&Paste", "Global menu and editor context menu actions")
                 enabled: root.pageStack.currentItem.editor.canPaste
                 onTriggered: root.pageStack.currentItem.editor.paste()
             }
         },
         
         Labs.Menu {
-            title: i18nc("Global menu actions", "&View")
+            title: qsTr("&View", "Global menu actions")
             
             Labs.MenuItem {
-                text: i18nc("Global menu actions", "Full &screen")
+                text: qsTr("Full &screen", "Global menu actions")
                 visible: !fullScreenPlatform
                 checkable: true
                 checked: root.__fullScreen
                 onTriggered: root.__fullScreen = !root.__fullScreen
             }
             //Labs.MenuItem {
-            //    text: i18n("&Auto full screen")
+            //    text: qsTr("&Auto full screen")
             //    checkable: true
             //    checked: root.__autoFullScreen
             //    onTriggered: root.__autoFullScreen = !root.__autoFullScreen
             //}
             Labs.MenuSeparator { }
             Labs.Menu {
-                title: i18nc("Global menu actions. Indicators highlight reading region.", "&Indicators")
+                title: qsTr("&Indicators", "Global menu actions. Indicators highlight reading region.")
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Shows pointer to the left of the reading region.", "&Left Pointer")
+                    text: qsTr("&Left Pointer", "Global menu actions. Shows pointer to the left of the reading region.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.styleState) === ReadRegionOverlay.PointerStates.LeftPointer
                     onTriggered: root.pageStack.currentItem.overlay.styleState = ReadRegionOverlay.PointerStates.LeftPointer
                 }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Shows pointer to the right of the reading region.", "&Right Pointer")
+                    text: qsTr("&Right Pointer", "Global menu actions. Shows pointer to the right of the reading region.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.styleState) === ReadRegionOverlay.PointerStates.RightPointer
                     onTriggered: root.pageStack.currentItem.overlay.styleState = ReadRegionOverlay.PointerStates.RightPointer
                 }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Shows pointers to the left and right of the reading region.", "B&oth Pointers")
+                    text: qsTr("B&oth Pointers", "Global menu actions. Shows pointers to the left and right of the reading region.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.styleState) === ReadRegionOverlay.PointerStates.Pointers
                     onTriggered: root.pageStack.currentItem.overlay.styleState = ReadRegionOverlay.PointerStates.Pointers
                 }
                 Labs.MenuSeparator { }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Translucent bars indicate reading region.", "&Bars")
+                    text: qsTr("&Bars", "Global menu actions. Translucent bars indicate reading region.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.styleState) === ReadRegionOverlay.PointerStates.Bars
                     onTriggered: root.pageStack.currentItem.overlay.styleState = ReadRegionOverlay.PointerStates.Bars
                 }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Translucent bars and left pointer indicate reading region.", "Bars Lef&t")
+                    text: qsTr("Bars Lef&t", "Global menu actions. Translucent bars and left pointer indicate reading region.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.styleState) === ReadRegionOverlay.PointerStates.BarsLeft
                     onTriggered: root.pageStack.currentItem.overlay.styleState = ReadRegionOverlay.PointerStates.BarsLeft
                 }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Translucent bars and right pointer indicate reading region.", "Bars Ri&ght")
+                    text: qsTr("Bars Ri&ght", "Global menu actions. Translucent bars and right pointer indicate reading region.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.styleState) === ReadRegionOverlay.PointerStates.BarsRight
                     onTriggered: root.pageStack.currentItem.overlay.styleState = ReadRegionOverlay.PointerStates.BarsRight
                 }
                 Labs.MenuSeparator { }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Enable all reading region indicators.", "&All")
+                    text: qsTr("&All", "Global menu actions. Enable all reading region indicators.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.styleState) === ReadRegionOverlay.PointerStates.All
                     onTriggered: root.pageStack.currentItem.overlay.styleState = ReadRegionOverlay.PointerStates.All
                 }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Disable all reading region indicators.", "&Hidden")
+                    text: qsTr("&Hidden", "Global menu actions. Disable all reading region indicators.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.styleState) === ReadRegionOverlay.PointerStates.None
                     onTriggered: root.pageStack.currentItem.overlay.styleState = ReadRegionOverlay.PointerStates.None
                 }
             }
             Labs.Menu {
-                title: i18nc("Global menu actions. Reading region indicates where a talent should be reading from.", "Readin&g region")
+                title: qsTr("Readin&g region", "Global menu actions. Reading region indicates where a talent should be reading from.")
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Align reading region to top of prompter.", "&Top")
+                    text: qsTr("&Top", "Global menu actions. Align reading region to top of prompter.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.positionState) === ReadRegionOverlay.PositionStates.Top
                     onTriggered: root.pageStack.currentItem.overlay.positionState = ReadRegionOverlay.PositionStates.Top
                 }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Align reading region to vertical center of prompter.", "&Middle")
+                    text: qsTr("&Middle", "Global menu actions. Align reading region to vertical center of prompter.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.positionState) === ReadRegionOverlay.PositionStates.Middle
                     onTriggered: root.pageStack.currentItem.overlay.positionState = ReadRegionOverlay.PositionStates.Middle
                 }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Align reading region to bottom of prompter.", "&Bottom")
+                    text: qsTr("&Bottom", "Global menu actions. Align reading region to bottom of prompter.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.positionState) === ReadRegionOverlay.PositionStates.Bottom
                     onTriggered: root.pageStack.currentItem.overlay.positionState = ReadRegionOverlay.PositionStates.Bottom
                 }
                 Labs.MenuSeparator { }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Enables drag and drop positioning of reading region.", "F&ree placement")
+                    text: qsTr("F&ree placement", "Global menu actions. Enables drag and drop positioning of reading region.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.positionState) === ReadRegionOverlay.PositionStates.Free
                     onTriggered: root.pageStack.currentItem.overlay.positionState = ReadRegionOverlay.PositionStates.Free
                 }
                 Labs.MenuItem {
-                    text: i18nc("Global menu actions. Fix positioning of reading region to what was set in \"Free placement\" mode.", "C&ustom (Fixed placement)")
+                    text: qsTr("C&ustom (Fixed placement)", "Global menu actions. Fix positioning of reading region to what was set in \"Free placement\" mode.")
                     checkable: true
                     checked: parseInt(root.pageStack.currentItem.overlay.positionState) === ReadRegionOverlay.PositionStates.Fixed
                     onTriggered: root.pageStack.currentItem.overlay.positionState = ReadRegionOverlay.PositionStates.Fixed
@@ -636,29 +636,29 @@ Kirigami.ApplicationWindow {
         },
 
         Labs.Menu {
-            title: i18nc("Global menu actions", "For&mat")
+            title: qsTr("For&mat", "Global menu actions")
             
             Labs.MenuItem {
-                text: i18nc("Global menu actions", "&Bold")
+                text: qsTr("&Bold", "Global menu actions")
                 checkable: true
                 checked: root.pageStack.currentItem.document.bold
                 onTriggered: root.pageStack.currentItem.document.bold = !root.pageStack.currentItem.document.bold
             }
             Labs.MenuItem {
-                text: i18nc("Global menu actions", "&Italic")
+                text: qsTr("&Italic", "Global menu actions")
                 checkable: true
                 checked: root.pageStack.currentItem.document.italic
                 onTriggered: root.pageStack.currentItem.document.italic = !root.pageStack.currentItem.document.italic
             }
             Labs.MenuItem {
-                text: i18nc("Global menu actions", "&Underline")
+                text: qsTr("&Underline", "Global menu actions")
                 checkable: true
                 checked: root.pageStack.currentItem.document.underline
                 onTriggered: root.pageStack.currentItem.document.underline = !root.pageStack.currentItem.document.underline
             }
             Labs.MenuSeparator { }
             Labs.MenuItem {
-                text: Qt.application.layoutDirection===Qt.LeftToRight ? i18nc("Global menu and editor actions. Text alignment.", "Align &Left") : i18nc("Global menu and editor actions. Text alignment.", "Align &Right")
+                text: Qt.application.layoutDirection===Qt.LeftToRight ? qsTr("Align &Left", "Global menu and editor actions. Text alignment.") : qsTr("Align &Right", "Global menu and editor actions. Text alignment.")
                 checkable: true
                 checked: Qt.application.layoutDirection===Qt.LeftToRight ? root.pageStack.currentItem.document.alignment === Qt.AlignLeft : root.pageStack.currentItem.document.alignment === Qt.AlignRight
                 onTriggered: {
@@ -669,13 +669,13 @@ Kirigami.ApplicationWindow {
                 }
             }
             Labs.MenuItem {
-                text: i18nc("Global menu actions. Text alignment.", "Align Cen&ter")
+                text: qsTr("Align Cen&ter", "Global menu actions. Text alignment.")
                 checkable: true
                 checked: root.pageStack.currentItem.document.alignment === Qt.AlignHCenter
                 onTriggered: root.pageStack.currentItem.document.alignment = Qt.AlignHCenter
             }
             Labs.MenuItem {
-                text: Qt.application.layoutDirection===Qt.LeftToRight ? i18nc("Global menu actions. Text alignment.", "Align &Right") : i18nc("Global menu actions. Text alignment.", "Align &Left")
+                text: Qt.application.layoutDirection===Qt.LeftToRight ? qsTr("Align &Right", "Global menu actions. Text alignment.") : qsTr("Align &Left", "Global menu actions. Text alignment.")
                 checkable: true
                 checked: Qt.application.layoutDirection===Qt.LeftToRight ? root.pageStack.currentItem.document.alignment === Qt.AlignRight : root.pageStack.currentItem.document.alignment === Qt.AlignLeft
                 onTriggered: {
@@ -687,33 +687,33 @@ Kirigami.ApplicationWindow {
             }
             // Justify is proven to make text harder to read for some readers. So I'm commenting out all text justification options from the program. I'm not removing them, only commenting out in case someone needs to re-enable. This article links to various sources that validate my decision: https://kaiweber.wordpress.com/2010/05/31/ragged-right-or-justified-alignment/ - Javier
             //Labs.MenuItem {
-            //    text: i18nc("Global menu actions. Text alignment.", "Align &Justify")
+            //    text: qsTr("Align &Justify", "Global menu actions. Text alignment.")
             //    checkable: true
             //    checked: root.pageStack.currentItem.document.alignment === Qt.AlignJustify
             //    onTriggered: root.pageStack.currentItem.document.alignment = Qt.AlignJustify
             //}
             Labs.MenuSeparator { }
             Labs.MenuItem {
-                text: i18nc("Global menu actions. Opens dialog to format currently selected text.", "C&haracter")
+                text: qsTr("C&haracter", "Global menu actions. Opens dialog to format currently selected text.")
                 onTriggered: root.pageStack.currentItem.fontDialog.open();
             }
             Labs.MenuItem {
-                text: i18nc("Global menu actions. Opens dialog to color currently selected text.", "Fo&nt Color")
+                text: qsTr("Fo&nt Color", "Global menu actions. Opens dialog to color currently selected text.")
                 onTriggered: root.pageStack.currentItem.colorDialog.open()
             }
         },
 
         Labs.Menu {
-            title: i18nc("Global menu actions. Menu regarding input settings.", "Controls")
+            title: qsTr("Controls", "Global menu actions. Menu regarding input settings.")
 
             Labs.MenuItem {
-                text: i18nc("Main menu and global menu actions. Touchpad scrolling and mouse wheel use have no effect while prompting.", "Disable scrolling while prompting")
+                text: qsTr("Disable scrolling while prompting", "Main menu and global menu actions. Touchpad scrolling and mouse wheel use have no effect while prompting.")
                 checkable: true
                 checked: root.__noScroll
                 onTriggered: root.__noScroll = !root.__noScroll
             }
             Labs.MenuItem {
-                text: i18nc("Main menu and global menu actions. Have touchpad and mouse wheel scrolling adjust velocity instead of scrolling like most other apps.", "Use scroll as velocity &dial")
+                text: qsTr("Use scroll as velocity &dial", "Main menu and global menu actions. Have touchpad and mouse wheel scrolling adjust velocity instead of scrolling like most other apps.")
                 enabled: !root.__noScroll
                 checkable: true
                 checked: root.__scrollAsDial
@@ -721,14 +721,14 @@ Kirigami.ApplicationWindow {
             }
             Labs.MenuSeparator { }
             Labs.MenuItem {
-                text: i18nc("Main menu and global menu actions. Have up arrow behave like down arrow and vice versa while prompting.", "Invert &arrow keys")
+                text: qsTr("Invert &arrow keys", "Main menu and global menu actions. Have up arrow behave like down arrow and vice versa while prompting.")
                 enabled: !root.__noScroll
                 checkable: true
                 checked: root.__invertArrowKeys
                 onTriggered: root.__invertArrowKeys = !root.__invertArrowKeys
             }
             Labs.MenuItem {
-                text: i18nc("Main menu and global menu actions. Invert scroll direction while prompting.", "Invert &scroll direction")
+                text: qsTr("Invert &scroll direction", "Main menu and global menu actions. Invert scroll direction while prompting.")
                 enabled: !root.__noScroll
                 checkable: true
                 checked: root.__invertScrollDirection
@@ -737,29 +737,29 @@ Kirigami.ApplicationWindow {
         },
 
         Labs.Menu {
-            title: i18nc("Global menu actions", "&Help")
+            title: qsTr("&Help", "Global menu actions")
             
             Labs.MenuItem {
-                text: i18nc("Global menu actions", "Report &Bug…")
-                onTriggered: Qt.openUrlExternally("Global menu actions", "https://feedback.qprompt.app")
+                text: qsTr("Report &Bug…", "Global menu actions")
+                onTriggered: Qt.openUrlExternally("https://feedback.qprompt.app")
                 icon.name: "tools-report-bug"
             }
             Labs.MenuSeparator { }
             //Labs.MenuItem {
             //     visible: false
-            //     text: i18n("Get &Studio Edition")
+            //     text: qsTr("Get &Studio Edition")
             //     onTriggered: Qt.openUrlExternally("https://studio.qprompt.app/")
             //     icon.name: "software-center"
             //}
             //Labs.MenuSeparator { }
             Labs.MenuItem {
-                text: i18nc("Main menu and global actions. Load document that welcomes users.", "Load &Welcome")
+                text: qsTr("Load &Welcome", "Main menu and global actions. Load document that welcomes users.")
                 icon.name: "help-info"
                 onTriggered: root.pageStack.currentItem.document.loadGuide()
             }
             Labs.MenuSeparator { }
             Labs.MenuItem {
-                text: i18nc("Global menu actions. Load about page. \"About AppName\"", "Abou&t %1", aboutData.displayName)
+                text: qsTr("Abou&t %1", "Global menu actions. Load about page. \"About AppName\"").arg(aboutData.displayName)
                 onTriggered: root.loadAboutPage()
                 icon.source: "qrc:/images/qprompt.png"
             }
@@ -894,8 +894,8 @@ Kirigami.ApplicationWindow {
     // Dialogues
     Labs.MessageDialog {
         id: restartDialog
-        title: i18nc("Restart application_name", "Restart %1", aboutData.displayName)
-        text: i18nc("application needs to restart for this change to fully take effect.\n\nWould you like to restart application now? All changes to document will be lost.", "%1 needs to restart for this change to fully take effect.\n\nWould you like to restart %1 now? All changes to document will be lost.", aboutData.displayName)
+        title: qsTr("Restart %1", "Restart application_name").arg(aboutData.displayName)
+        text: qsTr("%1 needs to restart for this change to fully take effect.\n\nWould you like to restart %1 now? All changes to document will be lost.", "application needs to restart for this change to fully take effect.\n\nWould you like to restart application now? All changes to document will be lost.").arg(aboutData.displayName)
         buttons: Labs.MessageDialog.Yes | Labs.MessageDialog.No
         onYesClicked: {
             qmlutil.restartApplication()
@@ -904,8 +904,8 @@ Kirigami.ApplicationWindow {
 
     Labs.MessageDialog {
         id : closeDialog
-        title: i18nc("Title for save before closing dialog", "Save Document")
-        text: i18n("Save changes to document before closing?")
+        title: qsTr("Save Document", "Title for save before closing dialog")
+        text: qsTr("Save changes to document before closing?")
         //icon: StandardIcon.Question
         buttons: (Labs.MessageDialog.Save | Labs.MessageDialog.Discard | Labs.MessageDialog.Cancel)
         //standardButtons: StandardButton.Save | StandardButton.Discard | StandardButton.Cancel

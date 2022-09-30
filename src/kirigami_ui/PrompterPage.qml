@@ -68,7 +68,7 @@ Kirigami.Page {
     actions {
         main: Kirigami.Action {
             id: promptingButton
-            text: i18n("Start prompter")
+            text: qsTr("Start prompter")
             iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-next-rtl" : "go-next"
             icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-previous.svg" : "icons/go-next.svg"
             onTriggered: prompter.toggle()
@@ -76,7 +76,7 @@ Kirigami.Page {
         left: Kirigami.Action {
             id: decreaseVelocityButton
             enabled: Kirigami.Settings.isMobile
-            text: pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.None ? i18n("Decrease velocity") : ""
+            text: pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.None ? qsTr("Decrease velocity") : ""
             iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-previous-rtl" : "go-previous"
             icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-next.svg" : "icons/go-previous.svg"
             onTriggered: {
@@ -90,7 +90,7 @@ Kirigami.Page {
         right: Kirigami.Action {
             id: increaseVelocityButton
             enabled: Kirigami.Settings.isMobile
-            text: pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.None ? i18n("Increase velocity") : ""
+            text: pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.None ? qsTr("Increase velocity") : ""
             iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-next-rtl" : "go-next"
             icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-previous.svg" : "icons/go-next.svg"
             onTriggered: {
@@ -106,26 +106,26 @@ Kirigami.Page {
 //        Kirigami.Action {
 //            id: wysiwygButton
 //            //visible: false
-//            text: i18nc("English acronym for What You See is What You Get", "WYSIWYG")
+//            text: qsTr("WYSIWYG", "English acronym for What You See is What You Get")
 //            //enabled: parseInt(prompter.state)===Prompter.States.Editing
 //            checkable: true
 //            checked: viewport.prompter.__wysiwyg
-//            tooltip: viewport.prompter.__wysiwyg ? i18n("\"What you see is what you get\" mode is On") : i18n("\"What you see is what you get\" mode is Off")
+//            tooltip: viewport.prompter.__wysiwyg ? qsTr("\"What you see is what you get\" mode is On") : qsTr("\"What you see is what you get\" mode is Off")
 //            onTriggered: viewport.prompter.toggleWysiwyg()
 //        },
         Kirigami.Action {
             id: readRegionButton
-            text: i18nc("Reading region indicates where a talent should be reading from", "Reading region")
+            text: qsTr("Reading region", "Reading region indicates where a talent should be reading from")
             //onTriggered: viewport.overlay.toggle()
-            tooltip: i18nc("Reading region indicates where a talent should be reading from", "Change reading region placement")
+            tooltip: qsTr("Change reading region placement", "Reading region indicates where a talent should be reading from")
 
             Kirigami.Action {
                 id: readRegionTopButton
                 iconName: "go-up"
                 icon.source: "icons/go-up.svg"
-                text: i18nc("Align reading region to top of prompter", "Top")
+                text: qsTr("Top", "Align reading region to top of prompter")
                 enabled: parseInt(viewport.overlay.positionState)!==ReadRegionOverlay.PositionStates.Top
-                tooltip: i18n("Move reading region to the top, convenient for use with webcams")
+                tooltip: qsTr("Move reading region to the top, convenient for use with webcams")
                 onTriggered: {
                     viewport.overlay.positionState = ReadRegionOverlay.PositionStates.Top
                     contextDrawer.close()
@@ -136,9 +136,9 @@ Kirigami.Page {
                 id: readRegionMiddleButton
                 iconName: "list-remove"
                 icon.source: "icons/list-remove.svg"
-                text: i18nc("Align reading region to vertical center of prompter", "Middle")
+                text: qsTr("Middle", "Align reading region to vertical center of prompter")
                 enabled: parseInt(viewport.overlay.positionState)!==ReadRegionOverlay.PositionStates.Middle
-                tooltip: i18n("Move reading region to the vertical center")
+                tooltip: qsTr("Move reading region to the vertical center")
                 onTriggered: {
                     viewport.overlay.positionState = ReadRegionOverlay.PositionStates.Middle
                     contextDrawer.close()
@@ -149,9 +149,9 @@ Kirigami.Page {
                 id: readRegionBottomButton
                 iconName: "go-down"
                 icon.source: "icons/go-down.svg"
-                text: i18nc("Align reading region to bottom of prompter", "Bottom")
+                text: qsTr("Bottom", "Align reading region to bottom of prompter")
                 enabled: parseInt(viewport.overlay.positionState)!==ReadRegionOverlay.PositionStates.Bottom
-                tooltip: i18n("Move reading region to the bottom")
+                tooltip: qsTr("Move reading region to the bottom")
                 onTriggered: {
                     viewport.overlay.positionState = ReadRegionOverlay.PositionStates.Bottom
                     contextDrawer.close()
@@ -162,9 +162,9 @@ Kirigami.Page {
                 id: readRegionFreeButton
                 iconName: "handle-sort"
                 icon.source: "icons/handle-sort.svg"
-                text: i18nc("Refers to free placement. Enables drag and drop positioning of reading region.", "Free")
+                text: qsTr("Free", "Refers to free placement. Enables drag and drop positioning of reading region.")
                 enabled: parseInt(viewport.overlay.positionState)!==ReadRegionOverlay.PositionStates.Free
-                tooltip: i18n("Move reading region freely by dragging and dropping")
+                tooltip: qsTr("Move reading region freely by dragging and dropping")
                 onTriggered: {
                     viewport.overlay.positionState = ReadRegionOverlay.PositionStates.Free
                     contextDrawer.close()
@@ -175,9 +175,9 @@ Kirigami.Page {
                 id: readRegionCustomButton
                 iconName: "dialog-ok-apply"
                 icon.source: "icons/dialog-ok-apply.svg"
-                text: i18nc("Fix positioning of reading region to what was set in \"Free placement\" mode", "Custom")
+                text: qsTr("Custom", "Fix positioning of reading region to what was set in \"Free placement\" mode")
                 enabled: parseInt(viewport.overlay.positionState)!==ReadRegionOverlay.PositionStates.Fixed
-                tooltip: i18n("Fix reading region to the position set using free placement mode")
+                tooltip: qsTr("Fix reading region to the position set using free placement mode")
                 onTriggered: {
                     viewport.overlay.positionState = ReadRegionOverlay.PositionStates.Fixed
                     contextDrawer.close()
@@ -203,22 +203,22 @@ Kirigami.Page {
                     onClicked: viewport.overlay.toggleLinesInRegion(false)
                     Label {
                         id: label
-                        text: i18nc("Height of reading region relative to single line height. E.g. Height: 2.5", "Height: %1", viewport.overlay.linesInRegion)
+                        text: qsTr("Height: %1", "Height of reading region relative to single line height. E.g. Height: 2.5").arg(viewport.overlay.linesInRegion)
                     }
                 }
             }
             // Commenting out because there's no way to hide an empty sub-menu in mobile interface and distinction between Normal and Auto is confusing.
             // Kirigami.Action {
             //     id: hideDecorationsButton
-            //     text: ["osx"].indexOf(Qt.platform.os)!==-1 || enabled ? i18n("Window frame") : i18n("Prompter mode")
+            //     text: ["osx"].indexOf(Qt.platform.os)!==-1 || enabled ? qsTr("Window frame") : qsTr("Prompter mode")
             //     enabled: !fullScreenPlatform
             //     visible: enabled
-            //     tooltip: i18n("Auto hide window decorations when not editing and read region is set to top")
+            //     tooltip: qsTr("Auto hide window decorations when not editing and read region is set to top")
             //     iconName: enabled ? (hideDecorations===0 ? "window" : (hideDecorations===1 ? "draw-rectangle" : "gnumeric-object-rectangle")) : ""
             //     icon.source: enabled ? (hideDecorations===0 ? "icons/window.svg" : (hideDecorations===1 ? "icons/draw-rectangle.svg" : "icons/gnumeric-object-rectangle.svg")) : ""
             //     Kirigami.Action {
-            //         text: i18n("Normal frame")
-            //         tooltip: i18n("Shows windows frame when in windowed mode")
+            //         text: qsTr("Normal frame")
+            //         tooltip: qsTr("Shows windows frame when in windowed mode")
             //         iconName: "window"
             //         icon.source: "icons/window.svg"
             //         enabled: parent.enabled && hideDecorations!==0
@@ -229,8 +229,8 @@ Kirigami.Page {
             //         }
             //     }
             //     Kirigami.Action {
-            //         text: i18n("Auto hide")
-            //         tooltip: i18n("Auto hide window decorations when not editing and read region is set to top")
+            //         text: qsTr("Auto hide")
+            //         tooltip: qsTr("Auto hide window decorations when not editing and read region is set to top")
             //         iconName: "draw-rectangle"
             //         icon.source: "icons/draw-rectangle.svg"
             //         enabled: parent.enabled && hideDecorations!==1
@@ -241,8 +241,8 @@ Kirigami.Page {
             //         }
             //     }
             //     Kirigami.Action {
-            //         text: i18n("Always hidden")
-            //         tooltip: i18n("Always hide window decorations")
+            //         text: qsTr("Always hidden")
+            //         tooltip: qsTr("Always hide window decorations")
             //         iconName: "gnumeric-object-rectangle"
             //         icon.source: "icons/gnumeric-object-rectangle.svg"
             //         enabled: parent.enabled && hideDecorations!==2
@@ -257,15 +257,15 @@ Kirigami.Page {
         Kirigami.Action {
             id: readRegionStyleButton
 
-            text: i18nc("Indicators highlight reading region", "Indicators")
-            tooltip: i18nc("Indicators highlight reading region", "Change reading region indicators")
+            text: qsTr("Indicators", "Indicators highlight reading region")
+            tooltip: qsTr("Change reading region indicators", "Indicators highlight reading region")
 
             Kirigami.Action {
                 id: readRegionLeftPointerButton
-                text: i18nc("Shows pointer to the left of the reading region", "Left pointer")
+                text: qsTr("Left pointer", "Shows pointer to the left of the reading region")
                 iconName: "go-next"
                 icon.source: "icons/go-next.svg"
-                tooltip: i18n("Left pointer indicates reading region")
+                tooltip: qsTr("Left pointer indicates reading region")
                 enabled: parseInt(overlay.styleState)!==ReadRegionOverlay.PointerStates.LeftPointer
                 onTriggered: {
                     overlay.styleState = ReadRegionOverlay.PointerStates.LeftPointer
@@ -275,10 +275,10 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: readRegionRightPointerButton
-                text: i18nc("Shows pointer to the right of the reading region", "Right pointer")
+                text: qsTr("Right pointer", "Shows pointer to the right of the reading region")
                 iconName: "go-previous"
                 icon.source: "icons/go-previous.svg"
-                tooltip: i18n("Right pointer indicates reading region")
+                tooltip: qsTr("Right pointer indicates reading region")
                 enabled: parseInt(overlay.styleState)!==ReadRegionOverlay.PointerStates.RightPointer
                 onTriggered: {
                     overlay.styleState = ReadRegionOverlay.PointerStates.RightPointer
@@ -288,10 +288,10 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: readRegionPointersButton
-                text: i18nc("Shows pointers to the left and right of the reading region", "Both pointers")
+                text: qsTr("Both pointers", "Shows pointers to the left and right of the reading region")
                 iconName: "transform-move-horizontal"
                 icon.source: "icons/transform-move-horizontal.svg"
-                tooltip: i18n("Left and right pointers indicate reading region")
+                tooltip: qsTr("Left and right pointers indicate reading region")
                 enabled: parseInt(overlay.styleState)!==ReadRegionOverlay.PointerStates.Pointers
                 onTriggered: {
                     overlay.styleState = ReadRegionOverlay.PointerStates.Pointers
@@ -301,10 +301,10 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: readRegionBarsButton
-                text: i18nc("Translucent bars indicate reading region", "Bar")
+                text: qsTr("Bar", "Translucent bars indicate reading region")
                 iconName: "list-remove"
                 icon.source: "icons/list-remove.svg"
-                tooltip: i18n("Translucent bars indicate reading region")
+                tooltip: qsTr("Translucent bars indicate reading region")
                 enabled: parseInt(overlay.styleState)!==ReadRegionOverlay.PointerStates.Bars
                 onTriggered: {
                     overlay.styleState = ReadRegionOverlay.PointerStates.Bars
@@ -314,10 +314,10 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: readRegionBarsLeftButton
-                text: i18nc("Translucent bars and left pointer indicate reading region", "Bar && left")
+                text: qsTr("Bar && left", "Translucent bars and left pointer indicate reading region")
                 iconName: "sidebar-collapse-right"
                 icon.source: "icons/sidebar-collapse-right.svg"
-                tooltip: i18n("Translucent bars and left pointer indicate reading region")
+                tooltip: qsTr("Translucent bars and left pointer indicate reading region")
                 enabled: parseInt(overlay.styleState)!==ReadRegionOverlay.PointerStates.BarsLeft
                 onTriggered: {
                     overlay.styleState = ReadRegionOverlay.PointerStates.BarsLeft
@@ -327,10 +327,10 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: readRegionBarsRightButton
-                text: i18nc("Translucent bars and right pointer indicate reading region", "Bar && right")
+                text: qsTr("Bar && right", "Translucent bars and right pointer indicate reading region")
                 iconName: "sidebar-collapse-left"
                 icon.source: "icons/sidebar-collapse-left.svg"
-                tooltip: i18n("Translucent bars and right pointer indicate reading region")
+                tooltip: qsTr("Translucent bars and right pointer indicate reading region")
                 enabled: parseInt(overlay.styleState)!==ReadRegionOverlay.PointerStates.BarsRight
                 onTriggered: {
                     overlay.styleState = ReadRegionOverlay.PointerStates.BarsRight
@@ -340,10 +340,10 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: readRegionAllButton
-                text: i18nc("Enable all reading region indicators", "All")
+                text: qsTr("All", "Enable all reading region indicators")
                 iconName: "auto-transition"
                 icon.source: "icons/auto-transition.svg"
-                tooltip: i18nc("Enable all reading region indicators", "Use all reading region indicators")
+                tooltip: qsTr("Use all reading region indicators", "Enable all reading region indicators")
                 enabled: parseInt(overlay.styleState)!==ReadRegionOverlay.PointerStates.All
                 onTriggered: {
                     overlay.styleState = ReadRegionOverlay.PointerStates.All
@@ -353,10 +353,10 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: readRegionNoneButton
-                text: i18nc("Disable all reading region indicators", "Hidden")
+                text: qsTr("Hidden", "Disable all reading region indicators")
                 iconName: "view-list-text"
                 icon.source: "icons/view-list-text.svg"
-                tooltip: i18nc("Disable all reading region indicators", "Disable reading region indicators")
+                tooltip: qsTr("Disable reading region indicators", "Disable all reading region indicators")
                 enabled: parseInt(overlay.styleState)!==ReadRegionOverlay.PointerStates.None
                 onTriggered: {
                     overlay.styleState = ReadRegionOverlay.PointerStates.None
@@ -367,14 +367,14 @@ Kirigami.Page {
         },
         Kirigami.Action {
             id: timerButton
-            text: i18n("Timer")
+            text: qsTr("Timer")
             Kirigami.Action {
                 id: enableStopwatchButton
                 checkable: true
                 checked: viewport.timer.stopwatch
                 iconName: "keyframe"
                 icon.source: "icons/keyframe.svg"
-                text: i18n("Stopwatch")
+                text: qsTr("Stopwatch")
                 onTriggered: {
                     viewport.timer.stopwatch = !viewport.timer.stopwatch
                     // contextDrawer.close()
@@ -387,7 +387,7 @@ Kirigami.Page {
                 checked: viewport.timer.eta
                 iconName: "player-time"
                 icon.source: "icons/player-time.svg"
-                text: i18nc("Estimated Time of Arrival", "ETA")
+                text: qsTr("ETA", "Estimated Time of Arrival")
                 onTriggered: {
                     viewport.timer.eta = !viewport.timer.eta
                     // contextDrawer.close()
@@ -396,7 +396,7 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: timerColorButton
-                text: i18nc("Color of timer text", "Timer color")
+                text: qsTr("Timer color", "Color of timer text")
                 iconName: "format-text-color"
                 icon.source: "icons/format-text-color.svg"
                 onTriggered: {
@@ -407,7 +407,7 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: clearTimerColorButton
-                text: i18nc("Reset color of timer text back to default", "Clear color")
+                text: qsTr("Clear color", "Reset color of timer text back to default")
                 iconName: "tool_color_eraser"
                 icon.source: "icons/tool_color_eraser.svg"
                 enabled: !Qt.colorEqual(viewport.timer.textColor, '#AAA')
@@ -420,13 +420,13 @@ Kirigami.Page {
         },
         Kirigami.Action {
             id: countdownConfigButton
-            text: i18n("Countdown")
+            text: qsTr("Countdown")
             Kirigami.Action {
                 id: enableFramingButton
                 enabled: !autoStartCountdownButton.checked
                 checkable: true
                 checked: viewport.countdown.frame && !autoStartCountdownButton.checked
-                text: i18nc("Enables automatic alignment of prompter and text with the reading region", "Auto frame")
+                text: qsTr("Auto frame", "Enables automatic alignment of prompter and text with the reading region")
                 iconName: "transform-move-vertical"
                 icon.source: "icons/transform-move-vertical.svg"
                 onTriggered: {
@@ -443,7 +443,7 @@ Kirigami.Page {
                 enabled: viewport.countdown.frame
                 checkable: true
                 checked: viewport.countdown.enabled
-                text: i18n("Countdown")
+                text: qsTr("Countdown")
                 iconName: "chronometer-pause"
                 icon.source: "icons/chronometer-pause.svg"
                 onTriggered: {
@@ -460,10 +460,10 @@ Kirigami.Page {
                 enabled: enableCountdownButton.enabled && viewport.countdown.enabled
                 checkable: true
                 checked: viewport.countdown.autoStart && enableCountdownButton.checked
-                text: i18nc("Auto start countdown upon prompter getting started", "Auto start")
+                text: qsTr("Auto start", "Auto start countdown upon prompter getting started")
                 iconName: "chronometer"
                 icon.source: "icons/chronometer.svg"
-                tooltip: i18n("Start countdown automatically")
+                tooltip: qsTr("Start countdown automatically")
                 onTriggered: {
                     viewport.countdown.autoStart = !viewport.countdown.autoStart
                     // contextDrawer.close()
@@ -473,7 +473,7 @@ Kirigami.Page {
             Kirigami.Action {
                 id: setCountdownButton
                 enabled: enableCountdownButton.enabled && viewport.countdown.enabled
-                text: i18nc("Configure countdown duration", "Set duration")
+                text: qsTr("Set duration", "Configure countdown duration")
                 iconName: "keyframe-add"
                 icon.source: "icons/keyframe-add.svg"
                 onTriggered: {
@@ -491,11 +491,11 @@ Kirigami.Page {
                 //iconName = context.iconName
             }
 
-            text: i18nc("Prompter orientation and mirroring", "Orientation")
+            text: qsTr("Orientation", "Prompter orientation and mirroring")
 
             //Kirigami.Action {
-                //readonly property string shortName: i18n("No Flip")
-                //text: i18n("No flip")
+                //readonly property string shortName: qsTr("No Flip")
+                //text: qsTr("No flip")
                 //iconName: "window"
                 //enabled: viewport.prompter.__flipX || viewport.prompter.__flipY
                 //onTriggered: {
@@ -507,8 +507,8 @@ Kirigami.Page {
                 //}
             //}
             Kirigami.Action {
-                //readonly property string shortName: i18n("H Flip")
-                text: i18nc("Mirrors prompter horizontally", "Horizontal mirror")
+                //readonly property string shortName: qsTr("H Flip")
+                text: qsTr("Horizontal mirror", "Mirrors prompter horizontally")
                 //iconName: "object-flip-horizontal"
                 //icon.source: "icons/object-flip-horizontal.svg"
                 //enabled: !viewport.prompter.__flipX || viewport.prompter.__flipY
@@ -524,8 +524,8 @@ Kirigami.Page {
                 }
             }
             Kirigami.Action {
-                //readonly property string shortName: i18n("V Flip")
-                text: i18nc("Mirrors prompter vertically", "Vertical mirror")
+                //readonly property string shortName: qsTr("V Flip")
+                text: qsTr("Vertical mirror", "Mirrors prompter vertically")
                 //iconName: "object-flip-vertical"
                 //icon.source: "icons/object-flip-vertical.svg"
                 //enabled: viewport.prompter.__flipX || !viewport.prompter.__flipY
@@ -541,7 +541,7 @@ Kirigami.Page {
                 }
             }
             //Kirigami.Action {
-                //readonly property string shortName: i18n("HV Flip") text: i18n("180° rotation")
+                //readonly property string shortName: qsTr("HV Flip") text: qsTr("180° rotation")
                 //iconName: Qt.LeftToRight ? "object-rotate-left" : "object-rotate-right"
                 //icon.source: Qt.LeftToRight ? "icons/object-rotate-left.svg" : "icons/object-rotate-right.svg"
                 //enabled: !(viewport.prompter.__flipX && viewport.prompter.__flipY)
@@ -553,7 +553,7 @@ Kirigami.Page {
                 //}
             //}
             Kirigami.Action {
-                text: i18nc("Prompter rotation is disabled", "Don't rotate")
+                text: qsTr("Don't rotate", "Prompter rotation is disabled")
                 iconName: "window"
                 icon.source: "icons/window.svg"
                 enabled: viewport.forcedOrientation!==0
@@ -565,7 +565,7 @@ Kirigami.Page {
                 }
             }
             Kirigami.Action {
-                text: i18nc("Rotate prompter 90 degrees to the right", "90° clockwise")
+                text: qsTr("90° clockwise", "Rotate prompter 90 degrees to the right")
                 iconName: "object-rotate-right"
                 icon.source: "icons/object-rotate-right.svg"
                 enabled: viewport.forcedOrientation!==1
@@ -577,7 +577,7 @@ Kirigami.Page {
                 }
             }
             Kirigami.Action {
-                text: i18nc("Rotate prompter 90 degrees to the left", "90° counter")
+                text: qsTr("90° counter", "Rotate prompter 90 degrees to the left")
                 iconName: "object-rotate-left"
                 icon.source: "icons/object-rotate-left.svg"
                 enabled: viewport.forcedOrientation!==2
@@ -589,7 +589,7 @@ Kirigami.Page {
                 }
             }
             //Kirigami.Action {
-                //text: i18n("Inverted")
+                //text: qsTr("Inverted")
                 //iconName: Qt.LeftToRight ? "object-rotate-left" : "object-rotate-right"
                 //icon.source: Qt.LeftToRight ? "icons/object-rotate-left.svg" : "icons/object-rotate-right.svg"
                 //enabled: viewport.forcedOrientation!==3
@@ -603,10 +603,10 @@ Kirigami.Page {
         },
         Kirigami.Action {
             id: loadBackgroundButton
-            text: i18nc("Background refers to what appears behind the prompter", "Background")
+            text: qsTr("Background", "Background refers to what appears behind the prompter")
             Kirigami.Action {
                 id: changeBackgroundImageButton
-                text: i18nc("Set background image", "Set image")
+                text: qsTr("Set background image", "Set image")
                 iconName: "insert-image"
                 icon.source: "icons/insert-image.svg"
                 onTriggered: {
@@ -617,7 +617,7 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: changeBackgroundColorButton
-                text: i18nc("Set background color tint", "Set color")
+                text: qsTr("Set color", "Set background color tint")
                 iconName: "fill-color"
                 icon.source: "icons/fill-color.svg"
                 onTriggered: {
@@ -628,7 +628,7 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 id: clearBackgroundButton
-                text: i18nc("Set background settings back to default", "Clear")
+                text: qsTr("Clear", "Set background settings back to default")
                 enabled: prompterBackground.hasBackground
                 iconName: "tool_color_eraser"
                 icon.source: "icons/tool_color_eraser.svg"
@@ -642,7 +642,7 @@ Kirigami.Page {
         Kirigami.Action {
             id: displaySettings
             visible: (!Kirigami.Settings.isMobile || Qt.platform.os==='linux') && Qt.platform.os!=='haiku'
-            text: i18nc("Screens refers to computer displays", "Screens")
+            text: qsTr("Screens", "Screens refers to computer displays")
 
             Kirigami.Action {
                 displayComponent: ListView {
@@ -683,19 +683,19 @@ Kirigami.Page {
                         Label {
                             id: label
                             text: switch (flipSetting) {
-                                case 0 : return display.name + " : " + i18nc("Screen is disabled", "Off");
-                                case 1 : return display.name + " : " + i18nc("Screen is enabled but mirroring is disabled", "No Mirror");
-                                case 2 : return display.name + " : " + i18nc("Horizontal mirroring", "H Mirror");
-                                case 3 : return display.name + " : " + i18nc("Vertical mirroring", "V Mirror");
-                                case 4 : return display.name + " : " + i18nc("Horizontal and vertical mirroring", "HV Mirror");
+                                case 0 : return display.name + " : " + qsTr("Off", "Screen is disabled");
+                                case 1 : return display.name + " : " + qsTr("No Mirror", "Screen is enabled but mirroring is disabled");
+                                case 2 : return display.name + " : " + qsTr("H Mirror", "Horizontal mirroring");
+                                case 3 : return display.name + " : " + qsTr("V Mirror", "Vertical mirroring");
+                                case 4 : return display.name + " : " + qsTr("HV Mirror", "Horizontal and vertical mirroring");
                             }
                         }
                     }
                 }
             }
             Kirigami.Action {
-                text: i18nc("Display prompter copies onto displays", "Enable projection")
-                //tooltip: i18n("Display prompter copies onto extended displays")
+                text: qsTr("Enable projection", "Display prompter copies onto displays")
+                //tooltip: qsTr("Display prompter copies onto extended displays")
                 checkable: true
                 checked: projectionManager.isEnabled
                 onTriggered: {
@@ -706,7 +706,7 @@ Kirigami.Page {
             }
             Kirigami.Action {
                 enabled: projectionManager.isEnabled
-                text: i18nc("Enable scaling prompter copies being projected onto displays", "Scale projection")
+                text: qsTr("Scale projection", "Enable scaling prompter copies being projected onto displays")
                 checkable: true
                 checked: projectionManager.reScale
                 onTriggered: {
@@ -718,8 +718,8 @@ Kirigami.Page {
         },
         //Kirigami.Action {
         //    id: debug
-        //    text: i18n("Debug")
-        //    tooltip: i18n("Debug Action")
+        //    text: qsTr("Debug")
+        //    tooltip: qsTr("Debug Action")
         //    onTriggered: {
         //        console.log("Debug Action")
         //        prompterPage.test( true )
@@ -729,7 +729,7 @@ Kirigami.Page {
         Kirigami.Action {
             id: fullscreenButton
             visible: !fullScreenPlatform
-            text: root.__fullScreen ? i18n("Leave Fullscreen") : i18n("Fullscreen")
+            text: root.__fullScreen ? qsTr("Leave Fullscreen") : qsTr("Fullscreen")
             onTriggered: {
                 root.__fullScreen = !root.__fullScreen
                 contextDrawer.close()
@@ -929,7 +929,7 @@ Kirigami.Page {
         onSheetOpenChanged: prompterPage.actions.main.checked = sheetOpen
 
         header: Kirigami.Heading {
-            text: i18n("Countdown Setup")
+            text: qsTr("Countdown Setup")
             level: 1
         }
 
@@ -938,7 +938,7 @@ Kirigami.Page {
 
             ColumnLayout {
                 Label {
-                    text: i18n("Countdown iterations")
+                    text: qsTr("Countdown iterations")
                 }
                 SpinBox {
                     value: countdown.__iterations
@@ -981,7 +981,7 @@ Kirigami.Page {
     Kirigami.OverlaySheet {
         id: namedMarkerConfiguration
         header: Kirigami.Heading {
-            text: i18nc("Refers to a key on the keyboard used to skip to a user defined marker while prompting", "Skip Key")
+            text: qsTr("Skip Key", "Refers to a key on the keyboard used to skip to a user defined marker while prompting")
             level: 1
         }
         onSheetOpenChanged: {
@@ -1004,7 +1004,7 @@ Kirigami.Page {
             property alias setMarkerKeyButton: setMarkerKeyButton
             width: parent.width
             Label {
-                text: i18nc("Refers to a key on the keyboard used to skip to a user defined marker while prompting", "Key to perform skip to this marker")
+                text: qsTr("Key to perform skip to this marker", "Refers to a key on the keyboard used to skip to a user defined marker while prompting")
             }
             Loader {
                 id: setMarkerKeyButton
@@ -1045,14 +1045,14 @@ Kirigami.Page {
             //anchors.fill: parent
         //}
         //header: Kirigami.Heading {
-            //text: i18n("Start Velocity")
+            //text: qsTr("Start Velocity")
             //level: 1
         //}
 
         //ColumnLayout {
             //width: parent.width
             //Label {
-                //text: i18n("Velocity to have when starting to prompt")
+                //text: qsTr("Velocity to have when starting to prompt")
             //}
             //RowLayout {
                 //SpinBox {

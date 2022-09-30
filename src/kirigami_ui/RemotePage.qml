@@ -25,7 +25,7 @@ import org.kde.kirigami 2.11 as Kirigami
 Kirigami.Page {
     id: prompterPage
     
-    title: i18n("Remote Control")
+    title: qsTr("Remote Control")
     
     Remote {
         id: remote

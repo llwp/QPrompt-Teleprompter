@@ -180,13 +180,13 @@ Kirigami.ApplicationWindow {
         }
         actions: [
             Kirigami.Action {
-                text: i18nc("Main menu and global menu actions", "&New")
+                text: qsTr("&New", "Main menu and global menu actions")
                 iconName: "document-new"
                 shortcut: StandardKey.New
                 onTriggered: root.pageStack.currentItem.document.newDocument()
             },
             Kirigami.Action {
-                text: i18nc("Main menu and global menu actions", "&Open")
+                text: qsTr("&Open", "Main menu and global menu actions")
                 iconName: "document-open"
                 shortcut: StandardKey.Open
                 onTriggered: {
@@ -195,7 +195,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18nc("Main menu and global menu actions", "&Save")
+                text: qsTr("&Save", "Main menu and global menu actions")
                 iconName: "document-save"
                 shortcut: StandardKey.Save
                 onTriggered: {
@@ -204,7 +204,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18nc("Main menu and global menu actions", "Save &As")
+                text: qsTr("Save &As", "Main menu and global menu actions")
                 iconName: "document-save-as"
                 shortcut: StandardKey.SaveAs
                 onTriggered: {
@@ -214,19 +214,19 @@ Kirigami.ApplicationWindow {
             },
             Kirigami.Action {
                 visible: false
-                text: i18nc("Main menu actions", "&Recent Files")
+                text: qsTr("&Recent Files", "Main menu actions")
                 iconName: "document-open-recent"
                 //Kirigami.Action {
-                    //text: i18n("View Action 1")
-                    //onTriggered: showPassiveNotification(i18n("View Action 1 clicked"))
+                    //text: qsTr("View Action 1")
+                    //onTriggered: showPassiveNotification(qsTr("View Action 1 clicked"))
                 //}
             },
             Kirigami.Action {
-                text: i18nc("Main menu actions. Menu regarding input settings.", "&Controls Settings")
+                text: qsTr("&Controls Settings", "Main menu actions. Menu regarding input settings.")
                 iconName: "transform-browse" // "hand"
                 Kirigami.Action {
                     visible: ["android", "ios", "tvos", "ipados", "qnx"].indexOf(Qt.platform.os)===-1
-                    text: i18nc("Main menu and global menu actions. Opens dialog to configure keyboard inputs.", "Keyboard Inputs")
+                    text: qsTr("Keyboard Inputs", "Main menu and global menu actions. Opens dialog to configure keyboard inputs.")
                     iconName: "key-enter" // "keyboard"
                     onTriggered: {
                         root.pageStack.currentItem.key_configuration_overlay.open()
@@ -234,12 +234,12 @@ Kirigami.ApplicationWindow {
                 }
                 Kirigami.Action {
                     visible: ["android", "ios", "tvos", "ipados", "qnx"].indexOf(Qt.platform.os)===-1
-                    text: i18nc("Open 'scroll settings' from main menu and global menu actions", "Scroll throttle settings")
+                    text: qsTr("Scroll throttle settings", "Open 'scroll settings' from main menu and global menu actions")
                     iconName: "gnumeric-object-scrollbar" // "keyboard"
                     onTriggered: wheelSettings.open()
                 }
                 Kirigami.Action {
-                    text: i18nc("Main menu and global menu actions. Have up arrow behave like down arrow and vice versa while prompting.", "Invert &arrow keys")
+                    text: qsTr("Invert &arrow keys", "Main menu and global menu actions. Have up arrow behave like down arrow and vice versa while prompting.")
                     enabled: !root.__noScroll
                     iconName: "circular-arrow-shape"
                     checkable: true
@@ -247,7 +247,7 @@ Kirigami.ApplicationWindow {
                     onTriggered: root.__invertArrowKeys = !root.__invertArrowKeys
                 }
                 Kirigami.Action {
-                    text: i18nc("Main menu and global menu actions. Invert scroll direction while prompting.", "Invert &scroll direction")
+                    text: qsTr("Invert &scroll direction", "Main menu and global menu actions. Invert scroll direction while prompting.")
                     enabled: !root.__noScroll
                     iconName: "gnumeric-object-scrollbar"
                     checkable: true
@@ -255,16 +255,16 @@ Kirigami.ApplicationWindow {
                     onTriggered: root.__invertScrollDirection = !root.__invertScrollDirection
                 }
                 Kirigami.Action {
-                    text: i18nc("Main menu and global menu actions. Have touchpad and mouse wheel scrolling adjust velocity instead of scrolling like most other apps.", "Use scroll as velocity &dial")
+                    text: qsTr("Use scroll as velocity &dial", "Main menu and global menu actions. Have touchpad and mouse wheel scrolling adjust velocity instead of scrolling like most other apps.")
                     enabled: !root.__noScroll
                     iconName: "filename-bpm-amarok"
-                    // ToolTip.text: i18n("Use mouse and touchpad scroll as speed dial while prompting")
+                    // ToolTip.text: qsTr("Use mouse and touchpad scroll as speed dial while prompting")
                     checkable: true
                     checked: root.__scrollAsDial
                     onTriggered: root.__scrollAsDial = !root.__scrollAsDial
                 }
                 Kirigami.Action {
-                    text: i18nc("Main menu and global menu actions. Touchpad scrolling and mouse wheel use have no effect while prompting.", "Disable scrolling while prompting")
+                    text: qsTr("Disable scrolling while prompting", "Main menu and global menu actions. Touchpad scrolling and mouse wheel use have no effect while prompting.")
                     iconName: "paint-none"
                     checkable: true
                     checked: root.__noScroll
@@ -272,10 +272,10 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18nc("Main menu actions", "Other &Settings")
+                text: qsTr("Other &Settings", "Main menu actions")
                 iconName: "configure"
 //                 Kirigami.Action {
-//                     text: i18n("Telemetry")
+//                     text: qsTr("Telemetry")
 //                     iconName: "document-send"
 //                     onTriggered: {
 //                         root.loadTelemetryPage()
@@ -283,7 +283,7 @@ Kirigami.ApplicationWindow {
 //                 }
                 Kirigami.Action {
                     id: hideFormattingToolsAlwaysSetting
-                    text: i18nc("Main menu actions", "Always hide formatting tools")
+                    text: qsTr("Always hide formatting tools", "Main menu actions")
                     iconName: "newline"
                     checkable: true
                     checked: root.pageStack.currentItem.footer.hideFormattingToolsAlways
@@ -292,7 +292,7 @@ Kirigami.ApplicationWindow {
                 Kirigami.Action {
                     id: hideFormattingToolsWhilePromptingSetting
                     enabled: !hideFormattingToolsAlwaysSetting.checked
-                    text: i18nc("Main menu actions. Hides formatting tools while not in edit mode.", "Auto hide formatting tools")
+                    text: qsTr("Auto hide formatting tools", "Main menu actions. Hides formatting tools while not in edit mode.")
                     iconName: "list-remove"
                     checkable: true
                     checked: root.pageStack.currentItem.footer.hideFormattingToolsWhilePrompting
@@ -300,7 +300,7 @@ Kirigami.ApplicationWindow {
                 }
                 Kirigami.Action {
                     id: enableOverlayContrastSetting
-                    text: i18nc("Main menu actions. Disables contrast effect for the reading region overlay.", "Disable overlay contrast")
+                    text: qsTr("Disable overlay contrast", "Main menu actions. Disables contrast effect for the reading region overlay.")
                     //iconName: "edit-opacity"
                     iconSource: "qrc:/icons/edit-opacity.svg"
                     checkable: true
@@ -311,7 +311,7 @@ Kirigami.ApplicationWindow {
                     id: transparencySetting
                     property bool dirty: false
                     visible: ["android", "ios", "tvos", "ipados", "qnx"].indexOf(Qt.platform.os)===-1
-                    text: i18n("Disable background transparency")
+                    text: qsTr("Disable background transparency")
                     //iconName: "contrast"
                     iconSource: "qrc:/icons/contrast.svg"
                     checkable: true
@@ -326,7 +326,7 @@ Kirigami.ApplicationWindow {
                 }
                 Kirigami.Action {
                     id: subpixelSetting
-                    text: i18nc("Main menu actions. QPrompt switches between two text rendering techniques when the base font size exceeds 120px. Enabling this option forces QPrompt to always use the default renderer, which features smoother sub-pixel animations.", "Force sub-pixel text renderer past 120px")
+                    text: qsTr("Force sub-pixel text renderer past 120px", "Main menu actions. QPrompt switches between two text rendering techniques when the base font size exceeds 120px. Enabling this option forces QPrompt to always use the default renderer, which features smoother sub-pixel animations.")
                     // Hiding option because only Qt text renderer is used on devices of greater pixel density, due to bug in rendering native fonts while scaling is enabled.
                     visible: ['android', 'ios', 'wasm', 'tvos', 'qnx', 'ipados'].indexOf(Qt.platform.os)===-1 && screen.devicePixelRatio === 1.0
                     iconName: "format-font-size-more"
@@ -335,21 +335,21 @@ Kirigami.ApplicationWindow {
                     onTriggered: root.forceQtTextRenderer = !root.forceQtTextRenderer
                 }
 //                 Kirigami.Action {
-//                     text: i18nc("Main menu actions", "Restore factory defaults")
+//                     text: qsTr("Restore factory defaults", "Main menu actions")
 //                     iconName: "edit-clear-history"
 //                     onTriggered: {
-//                         showPassiveNotification(i18n("Feature not yet implemented"))
+//                         showPassiveNotification(qsTr("Feature not yet implemented"))
 //                     }
 //                 }
             },
             Kirigami.Action {
-                text: i18nc("Main menu actions. Load about page.", "Abou&t %1", aboutData.displayName)
+                text: qsTr("Abou&t %1", "Main menu actions. Load about page.").arg(aboutData.displayName)
                 iconName: "help-about"
                 onTriggered: loadAboutPage()
             },
             Kirigami.Action {
                 visible: !Kirigami.Settings.isMobile
-                text: i18nc("Main menu and global menu actions", "&Quit")
+                text: qsTr("&Quit", "Main menu and global menu actions")
                 iconName: "application-exit"
                 shortcut: StandardKey.Quit
                 onTriggered: close()
@@ -383,7 +383,7 @@ Kirigami.ApplicationWindow {
         ]
         topContent: RowLayout {
             Button {
-                text: i18nc("Main menu and global actions. Load document that welcomes users.", "Load &Welcome")
+                text: qsTr("Load &Welcome", "Main menu and global actions. Load document that welcomes users.")
                 flat: true
                 onClicked: {
                     root.pageStack.currentItem.document.loadGuide()
@@ -391,7 +391,7 @@ Kirigami.ApplicationWindow {
                 }
             }
             // Button {
-            //     text: i18nc("Main menu and global actions.", "Remote")
+            //     text: qsTr("Remote", "Main menu and global actions.")
             //     flat: true
             //     onClicked: {
             //         root.pageStack.layers.push(remoteControlPageComponent, {})
@@ -400,7 +400,7 @@ Kirigami.ApplicationWindow {
             // }
             // Button {
             //     id: themeSwitch
-            //     text: i18nc("Main menu and global actions.", "Dark &Mode")
+            //     text: qsTr("Dark &Mode", "Main menu and global actions.")
             //     flat: true
             //     onClicked: {
             //         appTheme.selection = (appTheme.selection + 1) % 3;
@@ -409,7 +409,7 @@ Kirigami.ApplicationWindow {
             //         // If the system theme is active, and its background is either black or the exact same as that of either the material light o dark theme's, skip the system theme.
             //         if (appTheme.selection===0 && (Qt.colorEqual(bg, "#000000") || Qt.colorEqual(bg, "#FAFAFA") || Qt.colorEqual(bg, "#303030")))
             //             appTheme.selection = (appTheme.selection + 1) % 3
-            //         showPassiveNotification(i18n("Feature not fully implemented"))
+            //         showPassiveNotification(qsTr("Feature not fully implemented"))
             //     }
             // }
         }
@@ -419,7 +419,7 @@ Kirigami.ApplicationWindow {
                     const date = new Date();
                     return ee || date.getMonth()===4 && date.getDate()===4
                 }
-                text: i18n("Darth mode")
+                text: qsTr("Darth mode")
                 flat: true
                 checkable: true
                 checked: root.theforce
@@ -544,8 +544,8 @@ Kirigami.ApplicationWindow {
     // Dialogues
     Labs.MessageDialog {
         id: restartDialog
-        title: i18nc("Restart application_name", "Restart %1", aboutData.displayName)
-        text: i18nc("application needs to restart for this change to fully take effect.\n\nWould you like to restart application now? All changes to document will be lost.", "%1 needs to restart for this change to fully take effect.\n\nWould you like to restart %1 now? All changes to document will be lost.", aboutData.displayName)
+        title: qsTr("Restart %1", "Restart application_name").arg(aboutData.displayName)
+        text: qsTr("%1 needs to restart for this change to fully take effect.\n\nWould you like to restart %1 now? All changes to document will be lost.", "application needs to restart for this change to fully take effect.\n\nWould you like to restart application now? All changes to document will be lost.").arg(aboutData.displayName)
         buttons: Labs.MessageDialog.Yes | Labs.MessageDialog.No
         onYesClicked: {
             qmlutil.restartApplication()
@@ -554,8 +554,8 @@ Kirigami.ApplicationWindow {
 
     Labs.MessageDialog {
         id : closeDialog
-        title: i18nc("Title for save before closing dialog", "Save Document")
-        text: i18n("Save changes to document before closing?")
+        title: qsTr("Save Document", "Title for save before closing dialog")
+        text: qsTr("Save changes to document before closing?")
         //icon: StandardIcon.Question
         buttons: (Labs.MessageDialog.Save | Labs.MessageDialog.Discard | Labs.MessageDialog.Cancel)
         //standardButtons: StandardButton.Save | StandardButton.Discard | StandardButton.Cancel

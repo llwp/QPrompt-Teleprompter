@@ -66,14 +66,14 @@ Item {
             if (prompter.__atEnd)
                 timeToEnd = 0
         }
-        etaTimer.text = /*i18n("SW") + " " +*/ timer.getTimeString(timeToEnd);
+        etaTimer.text = /*qsTr("SW") + " " +*/ timer.getTimeString(timeToEnd);
 
         newLastTime = new Date().getTime()
         if (clock.stopwatch && !running)
             startTime = startTime + newLastTime - lastTime
         lastTime = newLastTime
         elapsedMilliseconds = lastTime - startTime
-        promptTime.text = /*i18n("SW") + " " +*/ timer.getTimeString(elapsedMilliseconds/1000);
+        promptTime.text = /*qsTr("SW") + " " +*/ timer.getTimeString(elapsedMilliseconds/1000);
     }
     function reset() {
         timer.elapsedMilliseconds = 0;
@@ -137,7 +137,7 @@ Item {
             Label {
                 id: promptTime
                 visible: clock.stopwatch
-                text: /*i18n("SW") + " " +*/ "<pre>00:00:00</pre>"
+                text: /*qsTr("SW") + " " +*/ "<pre>00:00:00</pre>"
                 font.family: "Monospace"
                 font.pixelSize: stopwatch.fontSize
                 color: clock.textColor
@@ -149,7 +149,7 @@ Item {
             Label {
                 id: etaTimer
                 visible: clock.eta
-                text: /*i18n("ET") + " " +*/ "<pre>00:00:00</pre>"
+                text: /*qsTr("ET") + " " +*/ "<pre>00:00:00</pre>"
                 font.family: "Monospace"
                 font.pixelSize: stopwatch.fontSize
                 color: clock.textColor

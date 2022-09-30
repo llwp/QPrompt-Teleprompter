@@ -123,12 +123,12 @@ Rectangle {
             // selectExisting: true
             // selectedNameFilter: nameFilters[0]
             nameFilters: [
-              i18n("JPEG image") + "(*.jpg *.jpeg *.JPG *.JPEG)",
-              i18n("PNG image") + "(*.png *.PNG)",
-              i18n("GIF animation") + "(*.gif *.GIF)"
+              qsTr("JPEG image") + "(*.jpg *.jpeg *.JPG *.JPEG)",
+              qsTr("PNG image") + "(*.png *.PNG)",
+              qsTr("GIF animation") + "(*.gif *.GIF)"
             ]
             fileMode: Labs.FileDialog.OpenFile
-            folder: shortcuts.pictures
+            //folder: shortcuts.pictures
             onAccepted: prompterBackground.setBackgroundImage(openBackgroundDialog.fileUrl)
         }
     }
