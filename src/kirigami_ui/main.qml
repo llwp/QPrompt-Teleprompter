@@ -382,15 +382,15 @@ Kirigami.ApplicationWindow {
                         root.pageStack.currentItem.prompter.restoreFocus()
                     }
                     // Close open drawers
-                    else if (root.pageStack.currentItem.sideDrawer.drawerOpen)
-                        root.pageStack.currentItem.sideDrawer.close()
+                    else if (root.pageStack.currentItem.markersDrawer.drawerOpen)
+                        root.pageStack.currentItem.markersDrawer.close()
                     // Close open overlay sheets
-                    else if (root.pageStack.currentItem.countdown.configuration.sheetOpen)
-                        root.pageStack.currentItem.countdown.configuration.close()
+                    else if (root.pageStack.currentItem.countdownConfiguration.sheetOpen)
+                        root.pageStack.currentItem.countdownConfiguration.close()
                     else if (root.pageStack.currentItem.key_configuration_overlay.sheetOpen)
                         root.pageStack.currentItem.key_configuration_overlay.close()
-                    else if (root.pageStack.currentItem.footer.namedMarkerConfiguration.sheetOpen)
-                        root.pageStack.currentItem.footer.namedMarkerConfiguration.close()
+                    else if (root.pageStack.currentItem.namedMarkerConfiguration.sheetOpen)
+                        root.pageStack.currentItem.namedMarkerConfiguration.close()
                     else if (wheelSettings.sheetOpen)
                         wheelSettings.close()
                     // Close find, compare against enabled instead of isOpen to prevent closing find while it is invisible.
