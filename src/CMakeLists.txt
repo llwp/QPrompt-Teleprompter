@@ -227,24 +227,24 @@ else()
         Qt${QT_VERSION_MAJOR}::QuickControls2
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
-        Qt${QT_VERSION_MAJOR}::X11Extras
+#        Qt${QT_VERSION_MAJOR}::X11Extras
         KF5::I18n
         KF5::Kirigami2
         KF5::CoreAddons
-        KF5::IconThemes
+#        KF5::IconThemes
     )
-    if (KF5Crash_FOUND)
-        add_definitions(-DKF5Crash_FOUND)
-        target_link_libraries(${PROJECT_NAME} LINK_PRIVATE
-            KF5::Crash
-        )
-    endif()
-    if (QHotkey_FOUND)
-        add_definitions(-DQHotkey_FOUND)
-        target_link_libraries(${PROJECT_NAME} PUBLIC
-            qhotkey
-        )
-    endif()
+#    if (KF5Crash_FOUND)
+#        add_definitions(-DKF5Crash_FOUND)
+#        target_link_libraries(${PROJECT_NAME} LINK_PRIVATE
+#            KF5::Crash
+#        )
+#    endif()
+#    if (QHotkey_FOUND)
+#        add_definitions(-DQHotkey_FOUND)
+#        target_link_libraries(${PROJECT_NAME} PUBLIC
+#            qhotkey
+#        )
+#    endif()
 endif()
 
 # Copy icons that are not font based

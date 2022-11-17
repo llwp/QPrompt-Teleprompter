@@ -23,7 +23,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Shapes 1.12
 import QtQuick.Layouts 1.12
-import QtQuick.Dialogs 1.2
+import QtQuick.Dialogs //1.3
 import Qt.labs.settings 1.0
 
 //import com.cuperino.qprompt.promptertimer 1.0
@@ -39,7 +39,7 @@ Item {
     property bool stopwatch: false
     property bool eta: false
     property real size: 0.5
-    property alias textColor: timerSettings.color
+//    property alias textColor: timerSettings.color
     readonly property real centreX: prompter.centreX;
     readonly property real centreY: prompter.centreY;
 
@@ -107,7 +107,7 @@ Item {
         category: "timer"
         property alias stopwatch: clock.stopwatch
         property alias eta: clock.eta
-        property color color: timerColorDialog.currentColor
+        //property color color: timerColorDialog.currentColor
     }
 
     Item {
@@ -140,7 +140,7 @@ Item {
                 text: /*i18n("SW") + " " +*/ "<pre>00:00:00</pre>"
                 font.family: "Monospace"
                 font.pixelSize: stopwatch.fontSize
-                color: clock.textColor
+//                color: clock.textColor
                 leftPadding: stopwatch.marginX
                 rightPadding: stopwatch.marginX
                 topPadding: stopwatch.marginY
@@ -152,7 +152,7 @@ Item {
                 text: /*i18n("ET") + " " +*/ "<pre>00:00:00</pre>"
                 font.family: "Monospace"
                 font.pixelSize: stopwatch.fontSize
-                color: clock.textColor
+//                color: clock.textColor
                 leftPadding: stopwatch.marginX
                 rightPadding: stopwatch.marginX
                 topPadding: stopwatch.marginY
@@ -189,8 +189,8 @@ Item {
 
     ColorDialog {
         id: timerColorDialog
-        showAlphaChannel: false  // Line required for Android in Qt 5. Remove when refactoring to Qt 6.
-        color: '#AAA'
+//        showAlphaChannel: false  // Line required for Android in Qt 5. Remove when refactoring to Qt 6.
+//        color: '#AAA'
         onAccepted: {
             timerSettings.color = currentColor
         }

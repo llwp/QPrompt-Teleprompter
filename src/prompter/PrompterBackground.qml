@@ -22,7 +22,7 @@
 import QtQuick 2.12
 
 import Qt.labs.settings 1.0
-import QtQuick.Dialogs 1.3
+import QtQuick.Dialogs //1.3
 //import Qt.labs.platform 1.1 as Labs
 import com.cuperino.qprompt.abstractunits 1.0
 
@@ -112,7 +112,7 @@ Rectangle {
         ColorDialog {
             id: backgroundColorDialog
             // showAlphaChannel: false
-            currentColor: appTheme.__backgroundColor
+            //currentColor: appTheme.__backgroundColor
             onAccepted: {
                 console.log(color)
                 prompterBackground.backgroundColor = color
@@ -121,15 +121,15 @@ Rectangle {
 
         FileDialog {
             id: openBackgroundDialog
-            selectExisting: true
-            selectedNameFilter: nameFilters[0]
+//            selectExisting: true
+//            selectedNameFilter: nameFilters[0]
             nameFilters: [
               i18n("JPEG image") + "(*.jpg *.jpeg *.JPG *.JPEG)",
               i18n("PNG image") + "(*.png *.PNG)",
               i18n("GIF animation") + "(*.gif *.GIF)"
             ]
-            // fileMode: Labs.FileDialog.OpenFile
-            folder: shortcuts.pictures
+            fileMode: FileDialog.OpenFile
+            //folder: shortcuts.pictures
             onAccepted: prompterBackground.setBackgroundImage(openBackgroundDialog.fileUrl)
         }
     }

@@ -24,7 +24,7 @@ import org.kde.kirigami 2.11 as Kirigami
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Dialogs 1.3
+import QtQuick.Dialogs //1.3
 //import Qt.labs.platform 1.1 as Labs
 
 import com.cuperino.qprompt.markers 1.0
@@ -846,26 +846,26 @@ Kirigami.Page {
 
     FontDialog {
         id: fontDialog
-        font: Qt.font({
-            family: viewport.prompter.document.fontFamily,
+//        font: Qt.font({
+//            family: viewport.prompter.document.fontFamily,
 
-            bold: viewport.prompter.document.bold,
-            italic: viewport.prompter.document.italic,
-            underline: viewport.prompter.document.underline,
-            strikeout: viewport.prompter.document.strike,
+//            bold: viewport.prompter.document.bold,
+//            italic: viewport.prompter.document.italic,
+//            underline: viewport.prompter.document.underline,
+//            strikeout: viewport.prompter.document.strike,
 
-            //overline: viewport.prompter.document.overline,
-            //weight: viewport.prompter.document.weight,
-            //capitalization: viewport.prompter.document.capitalization,
-            //letterSpacing: viewport.prompter.document.letterSpacing,
-            //wordSpacing: viewport.prompter.document.wordSpacing,
-            //kerning: viewport.prompter.document.kerning,
-            //preferShaping: viewport.prompter.document.preferShaping,
-            //hintingPreference: viewport.prompter.document.hintingPreference,
-            //styleName: viewport.prompter.document.styleName
+//            //overline: viewport.prompter.document.overline,
+//            //weight: viewport.prompter.document.weight,
+//            //capitalization: viewport.prompter.document.capitalization,
+//            //letterSpacing: viewport.prompter.document.letterSpacing,
+//            //wordSpacing: viewport.prompter.document.wordSpacing,
+//            //kerning: viewport.prompter.document.kerning,
+//            //preferShaping: viewport.prompter.document.preferShaping,
+//            //hintingPreference: viewport.prompter.document.hintingPreference,
+//            //styleName: viewport.prompter.document.styleName
 
-            pointSize: ((editorToolbar.fontSizeSlider.value - editorToolbar.fontSizeSlider.from) * (72 - 6) / (editorToolbar.fontSizeSlider.to - editorToolbar.fontSizeSlider.from)) + 6
-        })
+//            pointSize: ((editorToolbar.fontSizeSlider.value - editorToolbar.fontSizeSlider.from) * (72 - 6) / (editorToolbar.fontSizeSlider.to - editorToolbar.fontSizeSlider.from)) + 6
+//        })
         onAccepted: {
             viewport.prompter.document.fontFamily = font.family;
 
@@ -890,12 +890,12 @@ Kirigami.Page {
 
     ColorDialog {
         id: colorDialog
-        showAlphaChannel: false
+//        showAlphaChannel: false
     }
 
     ColorDialog {
         id: highlightDialog
-        showAlphaChannel: false
+//        showAlphaChannel: false
     }
 
 //     ShaderEffectSource {
@@ -915,8 +915,13 @@ Kirigami.Page {
         //ProjectionWindow {}
     //}
 
-    MarkersDrawer {
+//    MarkersDrawer {
+//        id: markersDrawer
+//    }
+    Item {
         id: markersDrawer
+        property bool reopen: false
+        function open () {}
     }
 
     InputsOverlay {

@@ -44,8 +44,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(QT_DEFAULT_MAJOR_VERSION 5)
-set(QT_MIN_VERSION 5.15.2)
+set(QT_DEFAULT_MAJOR_VERSION 6)
+set(QT_MIN_VERSION 6.4.0)
 # KF5 and ECM 5.68 for Ubuntu 20.04 based Snap package.
 # KF5 5.78 for Ubuntu 21.04 and Debian 11, which require no backporting
 # Use 5.83 ECM on Windows to make use of ecm_add_app_icon syntax
@@ -225,7 +225,7 @@ else()
         QuickControls2
         Network
         Widgets
-        X11Extras
+#        X11Extras
     )
     #find_package(Qt${QT_VERSION_MAJOR} ${QT5_MIN_VERSION} NO_MODULE COMPONENTS
         #QmlImportScanner  # Used to get static QML. Gets ignored if not a static build
@@ -235,16 +235,16 @@ else()
         Kirigami2
         I18n
         CoreAddons
-        IconThemes
+#        IconThemes
     )
     find_package(KF5Crash ${REQUIRED_KF5_VERSION} COMPONENTS)
     set_package_properties(KF5Crash PROPERTIES
         DESCRIPTION "Graceful handling of application crashes."
         TYPE OPTIONAL
     )
-    find_package(QHotkey 1.5.0 COMPONENTS
-        QHotkey
-    )
+#    find_package(QHotkey 1.5.0 COMPONENTS
+#        QHotkey
+#    )
 endif()
 
 if (WIN32 OR UNIX) # AND NOT ANDROID

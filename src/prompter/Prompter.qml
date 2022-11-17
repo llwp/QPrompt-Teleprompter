@@ -74,7 +74,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Window 2.12
-import QtQuick.Dialogs 1.3
+import QtQuick.Dialogs //1.3
 import Qt.labs.platform 1.1 as Labs
 import Qt.labs.settings 1.0
 
@@ -1195,8 +1195,8 @@ Flickable {
 
     FileDialog {
         id: openDialog
-        selectExisting: true
-        selectedNameFilter: nameFilters[0]
+        //selectExisting: true
+        //selectedNameFilter: nameFilters[0]
         nameFilters: [
             i18nc("Format name (FORMAT_EXTENSION)", "Hypertext Markup Language (%1)", "HTML") + "(*.html *.htm *.xhtml *.HTML *.HTM *.XHTML)",
             i18nc("Format name (FORMAT_EXTENSION)", "Markdown (%1)", "MD") + "(*.md *.MD)",
@@ -1209,8 +1209,8 @@ Flickable {
             //i18nc("Format name (FORMAT_EXTENSION)", "Portable Document Format (%1)", "PDF") + "(*.pdf *.PDF)",
             i18nc("All file formats", "All Formats") + "(*.*)"
         ]
-        folder: shortcuts.documents
-        //fileMode: Labs.FileDialog.OpenFile
+        //folder: shortcuts.documents
+        fileMode: Labs.FileDialog.OpenFile
         onAccepted: {
             document.load("qrc:/blank.html")
             document.load(openDialog.fileUrl)
@@ -1227,7 +1227,7 @@ Flickable {
 
     FileDialog {
         id: saveDialog
-        selectExisting: false
+        //selectExisting: false
         defaultSuffix: 'html'
         nameFilters: if (Qt.platform.os==="android")
             return [
@@ -1243,8 +1243,8 @@ Flickable {
         //selectedNameFilter.index: document.fileType === "txt" ? 0 : 1
         // Always save as HTML
         //selectedNameFilter: nameFilters[0]
-        folder: shortcuts.documents
-        //fileMode: Labs.FileDialog.SaveFile
+        //folder: shortcuts.documents
+        fileMode: Labs.FileDialog.SaveFile
         onAccepted: {
             document.saveAs(saveDialog.fileUrl)
             document.isNewFile = false

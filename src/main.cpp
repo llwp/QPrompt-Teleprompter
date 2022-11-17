@@ -229,6 +229,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #if defined(Q_OS_MACOS)
     //engine.addImportPath(QStringLiteral("/opt/homebrew/lib/qml"));
     engine.addImportPath(QStringLiteral("/opt/homebrew/Cellar/kf5-kirigami2/5.95.0/lib/qt5/qml"));
+#elif defined(Q_OS_LINUX)
+    engine.addImportPath(QStringLiteral("/home/javier/Qt/6.4.1/gcc_64/lib64/qml"));
 #endif
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
