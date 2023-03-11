@@ -29,5 +29,8 @@
         <!-- Fonts -->
         <!-- Icon Fonts -->
         <file alias="fonts/fontello.ttf">fonts/icons/fontello.ttf</file>
+        <!-- JS Libraries -->
+        <file>docx_test_Word_365.docx</file>
+        <file alias="mammoth.browser.js">mammoth.browser.js</file>
     </qresource>
 </RCC>

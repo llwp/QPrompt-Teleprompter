@@ -81,6 +81,8 @@ import Qt.labs.settings 1.0
 import com.cuperino.qprompt.document 1.0
 import com.cuperino.qprompt.abstractunits 1.0
 
+import "mammoth.browser.js" as Mammoth
+
 Flickable {
     id: prompter
     // Enums
@@ -254,6 +256,17 @@ Flickable {
 
     // Toggle prompter state
     function toggle() {
+        Mammoth.convertToHtml({path: "qrc:/docx_test_Word_365.docx"})
+            .then(function(result){
+                var html = result.value; // The generated HTML
+                var messages = result.messages; // Any messages, such as warnings during conversion
+                console.log(messages);
+                console.log(html);
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+
         // Cancel auto loop if running
         if (loop.running)
             loop.stop()
@@ -1238,12 +1251,12 @@ Flickable {
             i18nc("Format name (FORMAT_EXTENSION)", "Hypertext Markup Language (%1)", "HTML") + "(*.html *.htm *.xhtml *.HTML *.HTM *.XHTML)",
             i18nc("Format name (FORMAT_EXTENSION)", "Markdown (%1)", "MD") + "(*.md *.MD)",
             i18nc("Format name (FORMAT_EXTENSION)", "Plain Text (%1)", "TXT") + "(*.txt *.text *.TXT *.TEXT)",
-            //i18nc("Format name (FORMAT_EXTENSION)", "OpenDocument Format Text Document (%1)", "ODT") + "(*.odt *.ODT)",
-            //i18nc("Format name (FORMAT_EXTENSION)", "AbiWord Document (%1)", "ABW") + "(*.abw *.ABW *.zabw *.ZABW)",
-            //i18nc("Format name (FORMAT_EXTENSION)", "Microsoft Word document (%1)", "DOCX, DOC") + "(*.docx *.doc *.DOCX *.DOC)",
+            i18nc("Format name (FORMAT_EXTENSION)", "OpenDocument Format Text Document (%1)", "ODT") + "(*.odt *.ODT)",
+            i18nc("Format name (FORMAT_EXTENSION)", "AbiWord Document (%1)", "ABW") + "(*.abw *.ABW *.zabw *.ZABW)",
+            i18nc("Format name (FORMAT_EXTENSION)", "Microsoft Word document (%1)", "DOCX, DOC") + "(*.docx *.doc *.DOCX *.DOC)",
             //i18nc("Format name (FORMAT_EXTENSION)", "Apple Pages Document (%1)", "PAGES") + "(*.pages *.PAGES)",
-            //i18nc("Format name (FORMAT_EXTENSION)", "Rich Text Format (%1)", "RTF") + "(*.rtf *.RTF)",
-            //i18nc("Format name (FORMAT_EXTENSION)", "Portable Document Format (%1)", "PDF") + "(*.pdf *.PDF)",
+            i18nc("Format name (FORMAT_EXTENSION)", "Rich Text Format (%1)", "RTF") + "(*.rtf *.RTF)",
+            i18nc("Format name (FORMAT_EXTENSION)", "Portable Document Format (%1)", "PDF") + "(*.pdf *.PDF)",
             i18nc("All file formats", "All Formats") + "(*.*)"
         ]
         folder: shortcuts.documents

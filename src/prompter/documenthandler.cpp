@@ -626,13 +626,13 @@ QString DocumentHandler::import(QString fileName, ImportFormat type)
         arguments << fileName;
     }
     // Using LibreOffice for most formats because of its ability to preserve formatting while converting to HTML.
-    else if (type == ODT || type == DOCX || type == DOC || type == RTF || type == ABW || type == PAGESX || type == PAGES) {
+    else if (type == ODT || type == DOCX || type == DOC || type == RTF || type == ABW || type == PDF) {
         program = office_importer;
         arguments << QString::fromStdString("--headless") << QString::fromStdString("--cat") << QString::fromStdString("--convert-to")
                   << QString::fromStdString("html:HTML") << fileName;
-    } else if (type == EPUB || type == MOBI || type == AZW) {
-        // Dev: not implemented
-    }
+    } // else if (type == EPUB || type == MOBI || type == AZW || type == PAGESX || type == PAGES) {
+    //    // Dev: not implemented
+    //}
 
     if (program == QString::fromStdString(""))
         return QString::fromStdString("Unsupported file format");
