@@ -7,3 +7,6 @@
 [submodule "3rdparty/KDMacTouchBar"]
 	path = 3rdparty/KDMacTouchBar
 	url = https://github.com/KDAB/KDMacTouchBar.git
+[submodule "src/fonts/noto-emoji"]
+	path = src/fonts/noto-emoji
+	url = https://github.com/Cuperino/noto-emoji.git

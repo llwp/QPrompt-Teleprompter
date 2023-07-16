@@ -46,6 +46,7 @@ set(qprompt_ASSETS
     icons/icons.qrc
     fonts/fonts.qrc
     fonts/chinese.qrc
+    fonts/emoji.qrc
 )
 
 qt_wrap_ui(qprompt_SRCS

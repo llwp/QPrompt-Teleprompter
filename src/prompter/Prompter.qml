@@ -701,7 +701,10 @@ Flickable {
                     id: westernSeriousSansfFont
                     source: "fonts/dejavu-sans.otf"
                 }
-
+                FontLoader {
+                    id: emojiFont
+                    source: "fonts/emoji.ttf"
+                }
                 // Draggable width adjustment borders
                 Component {
                     id: editorSidesBorder

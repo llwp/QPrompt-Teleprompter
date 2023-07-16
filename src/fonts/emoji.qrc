@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <!-- Emoji font is kept separate to reduce RAM consumption during build -->
+        <file alias="fonts/emoji.ttf">noto-emoji/fonts/NotoColorEmoji-noflags.ttf</file>
+    </qresource>
+</RCC>
