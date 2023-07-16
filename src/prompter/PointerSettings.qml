@@ -348,10 +348,14 @@ ColumnLayout {
                     }
                     Component.onCompleted: {
                         if (!fontSelector.currentIndex)
-                            currentIndex = indexOfValue("DejaVu Sans");
+                            currentIndex = indexOfValue(emojiFont.name);
                     }
                     Layout.fillWidth: true
                     Material.theme: Material.Dark
+                }
+                FontLoader {
+                    id: emojiFont
+                    source: "fonts/emoji.ttf"
                 }
             }
             RowLayout {
