@@ -1,0 +1,37 @@
+{
+  "name": "qprompt",
+  "version-semver": "1.2.0",
+  "dependencies": [
+    {
+      "name": "ecm",
+      "version>=": "5.98.0",
+      "host": true
+    },
+    {
+      "name": "kf5coreaddons",
+      "version>=": "5.98.0",
+      "host": true
+    },
+    {
+      "name": "kf5i18n",
+      "version>=": "5.98.0",
+      "host": true
+    },
+    {
+      "name": "kf5iconthemes",
+      "version>=": "5.98.0",
+      "host": true
+    },
+    {
+      "name": "kf5crash",
+      "version>=": "5.98.0",
+      "host": true
+    },
+    {
+      "name": "kf5config",
+      "version>=": "5.98.0",
+      "host": true
+    }
+  ],
+  "builtin-baseline": "01acfdfde3ed99280d3883a8fccd5fa4408f5214"
+}
