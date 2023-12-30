@@ -306,12 +306,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     endif()
     # Optional Linux, Windows, and macOS only dependencies
     if(LINUX OR WIN32 OR APPLE AND NOT IOS)
-        if (QHotkey_FOUND)
-            add_definitions(-DQHotkey_FOUND)
-            target_link_libraries(${PROJECT_NAME} PRIVATE
-                qhotkey
-            )
-        endif()
+        # if (QHotkey_FOUND)
+        #     add_definitions(-DQHotkey_FOUND)
+        #     target_link_libraries(${PROJECT_NAME} PRIVATE
+        #         qhotkey
+        #     )
+        # endif()
         if (KF${KF_VERSION_MAJOR}Crash_FOUND)
             add_definitions(-DKF${KF_VERSION_MAJOR}Crash_FOUND)
             target_link_libraries(${PROJECT_NAME} LINK_PRIVATE

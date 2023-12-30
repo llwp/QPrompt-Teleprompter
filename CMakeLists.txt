@@ -48,7 +48,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 set(QT_DEFAULT_MAJOR_VERSION 6)
-set(QT6_MIN_VERSION 6.4.2)
+set(QT6_MIN_VERSION 6.5.3)
 set(QT5_MIN_VERSION 5.15.2)
 
 # KDE Frameworks version
@@ -57,8 +57,6 @@ set(KF_MIN_VERSION 5.103.0)
 set(ECM_MIN_VERSION 5.84.0)
 
 # OPTIONS
-option(BUILD_WITH_QT6 ON)
-option(EXCLUDE_DEPRECATED_BEFORE_AND_AT "CURRENT")
 option(GIT_SUBMODULE "Checkout submodules during build" ON)
 option(USE_SUBMODULE_PACKAGES "Satisfy dependencies via submodules" OFF)
 
@@ -133,17 +131,49 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
+# Auto install dependencies
+if(USE_SUBMODULE_PACKAGES)
+    list(APPEND DEPENDENCIES
+        "3rdparty/extra-cmake-modules"
+        "3rdparty/kcoreaddons"
+        "3rdparty/ki18n"
+        "3rdparty/kirigami"
+        "3rdparty/kcrash"
+    )
+    if(LINUX OR WIN32 OR APPLE AND NOT IOS)
+        list(APPEND DEPENDENCIES
+            "3rdparty/kcrash"
+        )
+    endif()
+    if(LINUX OR HAIKU)
+        list(APPEND DEPENDENCIES
+            "3rdparty/QHotkey"
+        )
+    endif()
+    foreach(DEPENDENCY_PATH ${DEPENDENCIES})
+        string(SUBSTRING ${DEPENDENCY_PATH} 9 -1 DEPENDENCY)
+        set(DEPENDENCY_COPY "${CMAKE_CURRENT_BINARY_DIR}/${DEPENDENCY}")
+        file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/${DEPENDENCY_PATH}" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+        file(MAKE_DIRECTORY "${DEPENDENCY_COPY}/build")
+        exec_program(cmake ${DEPENDENCY_COPY} ARGS -B build
+            -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DQT_MAJOR_VERSION=6 -DBUILD_WITH_QT6=ON
+            -DEXCLUDE_DEPRECATED_BEFORE_AND_AT=5.91.0 -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"
+            -DCMAKE_INSTALL_PREFIX="${CMAKE_PREFIX_PATH}"
+        )
+        exec_program(cmake "${DEPENDENCY_COPY}/build"
+            ARGS --build .
+        )
+        exec_program(cmake "${DEPENDENCY_COPY}/build"
+            ARGS --install .
+        )
+    endforeach()
+endif()
+
 # CMake Dependencies
 
 # Satisfy ECM before other packages
-if(USE_SUBMODULE_PACKAGES)
-    add_subdirectory("3rdparty/extra-cmake-modules" build/ecm)
-    find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
-    list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-else()
-    find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
-    set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-endif()
+find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 # CMake and ECM includes
 include(FeatureSummary)
@@ -164,13 +194,14 @@ include(ECMPoQmTools)
 # C++ Dependencies
 
 # Determine Qt version and locate Core package
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
-set(KF_VERSION_MAJOR ${QT_VERSION_MAJOR})
+# find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+set(QT_VERSION_MAJOR 6)
+set(KF_VERSION_MAJOR 6)
 
 # Qt 6
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     set(QT_MIN_VERSION ${QT6_MIN_VERSION})
-    message("Building with Qt 6")
+    message("Building QPrompt with Qt 6")
     # Qt Framework
     if(ANDROID)
         find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS
@@ -195,13 +226,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         )
     endif()
     # KDE Frameworks
-    if(USE_SUBMODULE_PACKAGES)
-        add_subdirectory("3rdparty/kcoreaddons" build/kcoreaddons)
-        add_subdirectory("3rdparty/ki18n" build/ki18n)
-        add_subdirectory("3rdparty/kirigami" build/kirigami)
-        add_subdirectory("3rdparty/kcrash" build/kcrash)
-    endif()
-
     find_package(KF${KF_VERSION_MAJOR} ${KF_MIN_VERSION} REQUIRED COMPONENTS
         CoreAddons
         I18n
@@ -233,7 +257,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 # Qt 5
 else()
     set(QT_MIN_VERSION ${QT5_MIN_VERSION})
-    message("Building with Qt 5")
+    message("Building QPrompt with Qt 5")
     if(ANDROID)
         find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS
             Core
