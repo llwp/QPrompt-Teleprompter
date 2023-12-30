@@ -19,24 +19,39 @@
 #
 #**************************************************************************
 
-#include(ECMPoQmTools)
-#ecm_create_qm_loader(qprompt_QM_LOADER ../locale/qprompt.pot)
+# include(ECMPoQmTools)
+# ecm_create_qm_loader(qprompt_QM_LOADER ../locale/qprompt.pot)
 
 # Qt 6
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_standard_project_setup()
 
-    qt_add_executable(${PROJECT_NAME}
-        main.cpp
+    set(qprompt_cpp
         systemfontchooserdialog.h
         systemfontchooserdialog.cpp
     )
-    qt_wrap_ui(${PROJECT_NAME}
-        qt/systemfontchooserdialog.ui
+
+    qt_wrap_ui(qprompt_cpp
+        systemfontchooserdialog.ui
     )
 
-    set(qprompt_frontend_sources
-        # Kirigami UI Frontend
+    qt_add_executable(${PROJECT_NAME}
+        main.cpp
+        ${qprompt_cpp}
+    )
+
+    set(prompter_cpp
+        qmlutil.hpp
+        abstractunits.hpp
+        documenthandler.h
+        documenthandler.cpp
+        marker.hpp
+        markersmodel.h
+        markersmodel.cpp
+    )
+
+    # Kirigami UI Frontend
+    set(qprompt_qml
         kirigami_ui/main.qml
         kirigami_ui/+android/main.qml
         kirigami_ui/+windows/main.qml
@@ -53,8 +68,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         kirigami_ui/LayoutDirectionSettingsOverlay.qml
     )
 
-    set(prompter_sources
-        # Prompter component
+    # Prompter component
+    set(prompter_qml
         prompter/PrompterView.qml
         prompter/Prompter.qml
         prompter/ProgressIndicator.qml
@@ -73,8 +88,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         prompter/pointers/pointer_2.qml
     )
 
-    set(other_sources
-        # Other QML
+    # Other QML
+    set(other_qml
         qt/WindowDragger.qml
     )
 
@@ -211,20 +226,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         DEPENDENCIES
         QtQuick
         SOURCES
-        qmlutil.hpp
-        abstractunits.hpp
-        documenthandler.h
-        documenthandler.cpp
-        marker.hpp
-        markersmodel.h
-        markersmodel.cpp
+        ${prompter_cpp}
         QML_FILES
-        ${qprompt_frontend_sources}
-        ${prompter_sources}
-        ${other_sources}
+        ${qprompt_qml}
+        ${prompter_qml}
+        ${other_qml}
         RESOURCES
         ${image_files}
-        # ${font_files}
         ${document_files}
         ${icon_files}
     )
@@ -236,7 +244,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MACOSX_BUNDLE TRUE
         WIN32_EXECUTABLE TRUE
         QML_CACHEGEN_DIRECT_CALLS ON
-        QT_QMLCACHEGEN_ARGUMENTS "--verbose"
+        # QT_QMLCACHEGEN_ARGUMENTS "--verbose"
     )
 
     if (NOT IOS)
@@ -266,101 +274,56 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     )
 
     # Libraries
-    if (ANDROID)
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Quick
+        Qt${QT_VERSION_MAJOR}::QuickPrivate
+        Qt${QT_VERSION_MAJOR}::Gui
+        # Qt${QT_VERSION_MAJOR}::GuiPrivate
+        Qt${QT_VERSION_MAJOR}::Svg
+        # Qt${QT_VERSION_MAJOR}::SvgPrivate
+        Qt${QT_VERSION_MAJOR}::Qml
+        # Qt${QT_VERSION_MAJOR}::QmlPrivate
+        Qt${QT_VERSION_MAJOR}::QuickControls2
+        # Qt${QT_VERSION_MAJOR}::QuickControls2Private
+        Qt${QT_VERSION_MAJOR}::Network
+        # Qt${QT_VERSION_MAJOR}::NetworkPrivate
+        KF${KF_VERSION_MAJOR}::I18n
+        KF${KF_VERSION_MAJOR}::Kirigami2
+        KF${KF_VERSION_MAJOR}::CoreAddons
+    )
+    # MacOS only dependencies
+    if(APPLE AND NOT IOS)
+        target_include_directories(mactouchbar PRIVATE ${kdmactouchbar_SOURCE_DIR}/KDMacTouchBar)
+        target_link_directories(mactouchbar PRIVATE ${kdmactouchbar_SOURCE_DIR}/KDMacTouchBar)
+        target_link_libraries(${PROJECT_NAME} PRIVATE KDMacTouchBar)
+    # Desktop only dependencies
+    elseif(NOT ANDROID AND NOT IOS)
         target_link_libraries(${PROJECT_NAME} PRIVATE
-            Qt${QT_VERSION_MAJOR}::Core
-            Qt${QT_VERSION_MAJOR}::Quick
-            Qt${QT_VERSION_MAJOR}::Svg
-            Qt${QT_VERSION_MAJOR}::Gui
-            Qt${QT_VERSION_MAJOR}::Qml
-            Qt${QT_VERSION_MAJOR}::QuickControls2
-            Qt${QT_VERSION_MAJOR}::Network
-            Qt${QT_VERSION_MAJOR}::AndroidExtras
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
-        )
-    elseif (WASM OR IOS)
-        target_link_libraries(${PROJECT_NAME} PRIVATE
-            Qt${QT_VERSION_MAJOR}::Core
-            Qt${QT_VERSION_MAJOR}::Quick
-            Qt${QT_VERSION_MAJOR}::Svg
-            Qt${QT_VERSION_MAJOR}::Gui
-            Qt${QT_VERSION_MAJOR}::Qml
-            Qt${QT_VERSION_MAJOR}::QuickControls2
-            Qt${QT_VERSION_MAJOR}::Network
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
-        )
-    elseif(HAIKU)
-        target_link_libraries(${PROJECT_NAME} PUBLIC
-            Qt${QT_VERSION_MAJOR}::Core
-            Qt${QT_VERSION_MAJOR}::Quick
-            Qt${QT_VERSION_MAJOR}::Gui
-            Qt${QT_VERSION_MAJOR}::Svg
-            Qt${QT_VERSION_MAJOR}::Qml
-            Qt${QT_VERSION_MAJOR}::QuickControls2
-            Qt${QT_VERSION_MAJOR}::Network
-            Qt${QT_VERSION_MAJOR}::Widgets
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
-    #        KF6::IconThemes
-        )
-    elseif(WIN32 OR APPLE)
-        target_link_libraries(${PROJECT_NAME} PUBLIC
-            Qt${QT_VERSION_MAJOR}::Core
-            Qt${QT_VERSION_MAJOR}::Quick
-            Qt${QT_VERSION_MAJOR}::Gui
-            Qt${QT_VERSION_MAJOR}::Svg
-            Qt${QT_VERSION_MAJOR}::Qml
-            Qt${QT_VERSION_MAJOR}::QuickControls2
-            Qt${QT_VERSION_MAJOR}::Network
-            Qt${QT_VERSION_MAJOR}::Widgets
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
-        )
-    else()
-        target_link_libraries(${PROJECT_NAME} PRIVATE
-            Qt${QT_VERSION_MAJOR}::Core
-            Qt${QT_VERSION_MAJOR}::Quick
-            Qt${QT_VERSION_MAJOR}::QuickPrivate
-            Qt${QT_VERSION_MAJOR}::Gui
-            # Qt${QT_VERSION_MAJOR}::GuiPrivate
-            Qt${QT_VERSION_MAJOR}::Svg
-            # Qt${QT_VERSION_MAJOR}::SvgPrivate
-            Qt${QT_VERSION_MAJOR}::Qml
-            # Qt${QT_VERSION_MAJOR}::QmlPrivate
-            Qt${QT_VERSION_MAJOR}::QuickControls2
-            # Qt${QT_VERSION_MAJOR}::QuickControls2Private
-            Qt${QT_VERSION_MAJOR}::Network
-            # Qt${QT_VERSION_MAJOR}::NetworkPrivate
             Qt${QT_VERSION_MAJOR}::Widgets
             # Qt${QT_VERSION_MAJOR}::WidgetsPrivate
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
         )
     endif()
-    if(APPLE AND NOT IOS)
-        target_include_directories(mactouchbar PUBLIC ${kdmactouchbar_SOURCE_DIR}/KDMacTouchBar)
-        target_link_directories(mactouchbar PUBLIC ${kdmactouchbar_SOURCE_DIR}/KDMacTouchBar)
-        target_link_libraries(${PROJECT_NAME} PUBLIC KDMacTouchBar)
+    # Optional Linux, Windows, and macOS only dependencies
+    if(LINUX OR WIN32 OR APPLE AND NOT IOS)
+        if (QHotkey_FOUND)
+            add_definitions(-DQHotkey_FOUND)
+            target_link_libraries(${PROJECT_NAME} PRIVATE
+                qhotkey
+            )
+        endif()
+        if (KF${KF_VERSION_MAJOR}Crash_FOUND)
+            add_definitions(-DKF${KF_VERSION_MAJOR}Crash_FOUND)
+            target_link_libraries(${PROJECT_NAME} LINK_PRIVATE
+                KF${KF_VERSION_MAJOR}::Crash
+            )
+        endif()
     endif()
-    #target_include_directories(${PROJECT_NAME} PUBLIC ${qhotkey_SOURCE_DIR}/QHotkey)
-    #target_link_directories(${PROJECT_NAME} PUBLIC ${qhotkey_SOURCE_DIR}/QHotkey)
-#    if (QHotkey_FOUND)
-#        add_definitions(-DQHotkey_FOUND)
-#        target_link_libraries(${PROJECT_NAME} PUBLIC
-#            qhotkey
-#        )
-#    endif()
-    if (QHotkey_FOUND)
-        add_definitions(-DQHotkey_FOUND)
-        target_link_libraries(${PROJECT_NAME} PUBLIC
-            qhotkey
+    # Optional dependencies
+    if (KF${KF_VERSION_MAJOR}IconThemes_FOUND)
+        add_definitions(-DKF${KF_VERSION_MAJOR}IconThemes_FOUND)
+        target_link_libraries(${PROJECT_NAME} LINK_PRIVATE
+            KF${KF_VERSION_MAJOR}::IconThemes
         )
     endif()
 
@@ -368,19 +331,19 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 else()
     set(qprompt_SRCS
         main.cpp
-        prompter/markersmodel.cpp
-        prompter/documenthandler.cpp
-        qt/systemfontchooserdialog.cpp
+        markersmodel.cpp
+        documenthandler.cpp
+        systemfontchooserdialog.cpp
         #${qprompt_QM_LOADER}
     )
 
     set(qprompt_HDRS
-        prompter/marker.hpp
-        prompter/markersmodel.h
-        prompter/documenthandler.h
-        qt/systemfontchooserdialog.h
-        qt/abstractunits.hpp
-        qt/qmlutil.hpp
+        marker.hpp
+        markersmodel.h
+        documenthandler.h
+        systemfontchooserdialog.h
+        abstractunits.hpp
+        qmlutil.hpp
     )
 
     set(qprompt_ASSETS
@@ -504,9 +467,9 @@ else()
             Qt${QT_VERSION_MAJOR}::QuickControls2
             Qt${QT_VERSION_MAJOR}::Network
             Qt${QT_VERSION_MAJOR}::AndroidExtras
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
+            KF${KF_VERSION_MAJOR}::I18n
+            KF${KF_VERSION_MAJOR}::Kirigami2
+            KF${KF_VERSION_MAJOR}::CoreAddons
         )
     elseif (WASM OR IOS)
         target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -517,12 +480,12 @@ else()
             Qt${QT_VERSION_MAJOR}::Qml
             Qt${QT_VERSION_MAJOR}::QuickControls2
             Qt${QT_VERSION_MAJOR}::Network
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
+            KF${KF_VERSION_MAJOR}::I18n
+            KF${KF_VERSION_MAJOR}::Kirigami2
+            KF${KF_VERSION_MAJOR}::CoreAddons
         )
     elseif(HAIKU)
-        target_link_libraries(${PROJECT_NAME} PUBLIC
+        target_link_libraries(${PROJECT_NAME} PRIVATE
             Qt${QT_VERSION_MAJOR}::Core
             Qt${QT_VERSION_MAJOR}::Quick
             Qt${QT_VERSION_MAJOR}::Gui
@@ -531,13 +494,13 @@ else()
             Qt${QT_VERSION_MAJOR}::QuickControls2
             Qt${QT_VERSION_MAJOR}::Network
             Qt${QT_VERSION_MAJOR}::Widgets
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
-            KF6::IconThemes
+            KF${KF_VERSION_MAJOR}::I18n
+            KF${KF_VERSION_MAJOR}::Kirigami2
+            KF${KF_VERSION_MAJOR}::CoreAddons
+            KF${KF_VERSION_MAJOR}::IconThemes
         )
     elseif(WIN32 OR APPLE)
-        target_link_libraries(${PROJECT_NAME} PUBLIC
+        target_link_libraries(${PROJECT_NAME} PRIVATE
             Qt${QT_VERSION_MAJOR}::Core
             Qt${QT_VERSION_MAJOR}::Quick
             Qt${QT_VERSION_MAJOR}::Gui
@@ -546,31 +509,31 @@ else()
             Qt${QT_VERSION_MAJOR}::QuickControls2
             Qt${QT_VERSION_MAJOR}::Network
             Qt${QT_VERSION_MAJOR}::Widgets
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
+            KF${KF_VERSION_MAJOR}::I18n
+            KF${KF_VERSION_MAJOR}::Kirigami2
+            KF${KF_VERSION_MAJOR}::CoreAddons
         )
-        if (KF6Crash_FOUND)
-            add_definitions(-DKF6Crash_FOUND)
+        if (KF${KF_VERSION_MAJOR}Crash_FOUND)
+            add_definitions(-DKF${KF_VERSION_MAJOR}Crash_FOUND)
             target_link_libraries(${PROJECT_NAME} LINK_PRIVATE
-                KF6::Crash
+                KF${KF_VERSION_MAJOR}::Crash
             )
         endif()
         if (QHotkey_FOUND)
             add_definitions(-DQHotkey_FOUND)
-            target_link_libraries(${PROJECT_NAME} PUBLIC
+            target_link_libraries(${PROJECT_NAME} PRIVATE
                 qhotkey
             )
         endif()
         if(APPLE AND NOT IOS)
-            target_include_directories(mactouchbar PUBLIC ${kdmactouchbar_SOURCE_DIR}/KDMacTouchBar)
-            target_link_directories(mactouchbar PUBLIC ${kdmactouchbar_SOURCE_DIR}/KDMacTouchBar)
-            target_link_libraries(${PROJECT_NAME} PUBLIC KDMacTouchBar)
+            target_include_directories(mactouchbar PRIVATE ${kdmactouchbar_SOURCE_DIR}/KDMacTouchBar)
+            target_link_directories(mactouchbar PRIVATE ${kdmactouchbar_SOURCE_DIR}/KDMacTouchBar)
+            target_link_libraries(${PROJECT_NAME} PRIVATE KDMacTouchBar)
         endif()
     else()
-        #target_include_directories(${PROJECT_NAME} PUBLIC ${qhotkey_SOURCE_DIR}/QHotkey)
-        #target_link_directories(${PROJECT_NAME} PUBLIC ${qhotkey_SOURCE_DIR}/QHotkey)
-        target_link_libraries(${PROJECT_NAME} PUBLIC
+        #target_include_directories(${PROJECT_NAME} PRIVATE ${qhotkey_SOURCE_DIR}/QHotkey)
+        #target_link_directories(${PROJECT_NAME} PRIVATE ${qhotkey_SOURCE_DIR}/QHotkey)
+        target_link_libraries(${PROJECT_NAME} PRIVATE
             Qt${QT_VERSION_MAJOR}::Core
             Qt${QT_VERSION_MAJOR}::Quick
             Qt${QT_VERSION_MAJOR}::Gui
@@ -580,19 +543,20 @@ else()
             Qt${QT_VERSION_MAJOR}::Network
             Qt${QT_VERSION_MAJOR}::Widgets
             Qt${QT_VERSION_MAJOR}::X11Extras
-            KF6::I18n
-            KF6::Kirigami
-            KF6::CoreAddons
+            KF${KF_VERSION_MAJOR}::I18n
+            KF${KF_VERSION_MAJOR}::Kirigami2
+            KF${KF_VERSION_MAJOR}::CoreAddons
+            KF${KF_VERSION_MAJOR}::IconThemes
         )
-        if (KF6Crash_FOUND)
-            add_definitions(-DKF6Crash_FOUND)
+        if (KF${KF_VERSION_MAJOR}Crash_FOUND)
+            add_definitions(-DKF${KF_VERSION_MAJOR}Crash_FOUND)
             target_link_libraries(${PROJECT_NAME} LINK_PRIVATE
-                KF6::Crash
+                KF${KF_VERSION_MAJOR}::Crash
             )
         endif()
         if (QHotkey_FOUND)
             add_definitions(-DQHotkey_FOUND)
-            target_link_libraries(${PROJECT_NAME} PUBLIC
+            target_link_libraries(${PROJECT_NAME} PRIVATE
                 qhotkey
             )
         endif()
