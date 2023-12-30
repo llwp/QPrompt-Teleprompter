@@ -52,13 +52,14 @@ set(QT6_MIN_VERSION 6.5.3)
 set(QT5_MIN_VERSION 5.15.2)
 
 # KDE Frameworks version
-set(KF_MIN_VERSION 5.103.0)
+# set(KF_MIN_VERSION 5.103.0)
+set(KF_MIN_VERSION 5.246.0)
 # ECM matches Qt version
 set(ECM_MIN_VERSION 5.84.0)
 
 # OPTIONS
 option(GIT_SUBMODULE "Checkout submodules during build" ON)
-option(USE_SUBMODULE_PACKAGES "Satisfy dependencies via submodules" OFF)
+option(USE_SUBMODULE_PACKAGES "Satisfy dependencies via submodules" ON)
 
 # SYSTEM PATHS
 # ------------------------- BEGIN: lists to maintain manually -------------------------
@@ -127,46 +128,48 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
                         RESULT_VARIABLE GIT_SUBMOD_RESULT)
         if(NOT GIT_SUBMOD_RESULT EQUAL "0")
             message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules.")
+        else()
+            # Auto install dependencies
+            if(USE_SUBMODULE_PACKAGES)
+                list(APPEND DEPENDENCIES
+                    "3rdparty/extra-cmake-modules"
+                    "3rdparty/kcoreaddons"
+                    "3rdparty/ki18n"
+                    "3rdparty/kirigami"
+                    # "3rdparty/kcrash"
+                )
+                # if(LINUX OR WIN32 OR APPLE AND NOT IOS)
+                #     list(APPEND DEPENDENCIES
+                #         "3rdparty/kcrash"
+                #     )
+                # endif()
+                # if(LINUX OR HAIKU)
+                #     list(APPEND DEPENDENCIES
+                #         "3rdparty/QHotkey"
+                #     )
+                # endif()
+                set(KF5_DIR "${CMAKE_PREFIX_PATH}")
+                set(KF6_DIR "${CMAKE_PREFIX_PATH}")
+                foreach(DEPENDENCY_PATH ${DEPENDENCIES})
+                    string(SUBSTRING ${DEPENDENCY_PATH} 9 -1 DEPENDENCY)
+                    set(DEPENDENCY_COPY "${CMAKE_CURRENT_BINARY_DIR}/${DEPENDENCY}")
+                    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/${DEPENDENCY_PATH}" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+                    file(MAKE_DIRECTORY "${DEPENDENCY_COPY}/build")
+                    exec_program(cmake ${DEPENDENCY_COPY} ARGS -B build
+                        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DQT_MAJOR_VERSION=6 -DBUILD_WITH_QT6=ON
+                        -DEXCLUDE_DEPRECATED_BEFORE_AND_AT=5.91.0 -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"
+                        -DCMAKE_INSTALL_PREFIX="${CMAKE_PREFIX_PATH}"
+                    )
+                    exec_program(cmake "${DEPENDENCY_COPY}/build"
+                        ARGS --build .
+                    )
+                    exec_program(cmake "${DEPENDENCY_COPY}/build"
+                        ARGS --install .
+                    )
+                endforeach()
+            endif()
         endif()
     endif()
-endif()
-
-# Auto install dependencies
-if(USE_SUBMODULE_PACKAGES)
-    list(APPEND DEPENDENCIES
-        "3rdparty/extra-cmake-modules"
-        "3rdparty/kcoreaddons"
-        "3rdparty/ki18n"
-        "3rdparty/kirigami"
-        "3rdparty/kcrash"
-    )
-    if(LINUX OR WIN32 OR APPLE AND NOT IOS)
-        list(APPEND DEPENDENCIES
-            "3rdparty/kcrash"
-        )
-    endif()
-    if(LINUX OR HAIKU)
-        list(APPEND DEPENDENCIES
-            "3rdparty/QHotkey"
-        )
-    endif()
-    foreach(DEPENDENCY_PATH ${DEPENDENCIES})
-        string(SUBSTRING ${DEPENDENCY_PATH} 9 -1 DEPENDENCY)
-        set(DEPENDENCY_COPY "${CMAKE_CURRENT_BINARY_DIR}/${DEPENDENCY}")
-        file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/${DEPENDENCY_PATH}" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-        file(MAKE_DIRECTORY "${DEPENDENCY_COPY}/build")
-        exec_program(cmake ${DEPENDENCY_COPY} ARGS -B build
-            -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DQT_MAJOR_VERSION=6 -DBUILD_WITH_QT6=ON
-            -DEXCLUDE_DEPRECATED_BEFORE_AND_AT=5.91.0 -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"
-            -DCMAKE_INSTALL_PREFIX="${CMAKE_PREFIX_PATH}"
-        )
-        exec_program(cmake "${DEPENDENCY_COPY}/build"
-            ARGS --build .
-        )
-        exec_program(cmake "${DEPENDENCY_COPY}/build"
-            ARGS --install .
-        )
-    endforeach()
 endif()
 
 # CMake Dependencies
@@ -194,8 +197,8 @@ include(ECMPoQmTools)
 # C++ Dependencies
 
 # Determine Qt version and locate Core package
-# find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
-set(QT_VERSION_MAJOR 6)
+find_package(QT NAMES Qt6 Qt6 REQUIRED COMPONENTS Core)
+# set(QT_VERSION_MAJOR 6)
 set(KF_VERSION_MAJOR 6)
 
 # Qt 6
