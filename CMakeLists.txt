@@ -128,46 +128,6 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
                         RESULT_VARIABLE GIT_SUBMOD_RESULT)
         if(NOT GIT_SUBMOD_RESULT EQUAL "0")
             message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules.")
-        else()
-            # Auto install dependencies
-            if(USE_SUBMODULE_PACKAGES)
-                list(APPEND DEPENDENCIES
-                    "3rdparty/extra-cmake-modules"
-                    "3rdparty/kcoreaddons"
-                    "3rdparty/ki18n"
-                    "3rdparty/kirigami"
-                    # "3rdparty/kcrash"
-                )
-                # if(LINUX OR WIN32 OR APPLE AND NOT IOS)
-                #     list(APPEND DEPENDENCIES
-                #         "3rdparty/kcrash"
-                #     )
-                # endif()
-                # if(LINUX OR HAIKU)
-                #     list(APPEND DEPENDENCIES
-                #         "3rdparty/QHotkey"
-                #     )
-                # endif()
-                set(KF5_DIR "${CMAKE_PREFIX_PATH}")
-                set(KF6_DIR "${CMAKE_PREFIX_PATH}")
-                foreach(DEPENDENCY_PATH ${DEPENDENCIES})
-                    string(SUBSTRING ${DEPENDENCY_PATH} 9 -1 DEPENDENCY)
-                    set(DEPENDENCY_COPY "${CMAKE_CURRENT_BINARY_DIR}/${DEPENDENCY}")
-                    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/${DEPENDENCY_PATH}" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-                    file(MAKE_DIRECTORY "${DEPENDENCY_COPY}/build")
-                    exec_program(cmake ${DEPENDENCY_COPY} ARGS -B build
-                        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DQT_MAJOR_VERSION=6 -DBUILD_WITH_QT6=ON
-                        -DEXCLUDE_DEPRECATED_BEFORE_AND_AT=5.91.0 -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"
-                        -DCMAKE_INSTALL_PREFIX="${CMAKE_PREFIX_PATH}"
-                    )
-                    exec_program(cmake "${DEPENDENCY_COPY}/build"
-                        ARGS --build .
-                    )
-                    exec_program(cmake "${DEPENDENCY_COPY}/build"
-                        ARGS --install .
-                    )
-                endforeach()
-            endif()
         endif()
     endif()
 endif()
@@ -193,6 +153,47 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMSetupVersion)
 include(ECMSourceVersionControl)
 include(ECMPoQmTools)
+
+# Auto install dependencies
+if(USE_SUBMODULE_PACKAGES)
+    list(APPEND DEPENDENCIES
+        "3rdparty/extra-cmake-modules"
+        "3rdparty/kcoreaddons"
+        "3rdparty/ki18n"
+        "3rdparty/kirigami"
+        # "3rdparty/kcrash"
+    )
+    # if(LINUX OR WIN32 OR APPLE AND NOT IOS)
+    #     list(APPEND DEPENDENCIES
+    #         "3rdparty/kcrash"
+    #     )
+    # endif()
+    # if(LINUX OR HAIKU)
+    #     list(APPEND DEPENDENCIES
+    #         "3rdparty/QHotkey"
+    #     )
+    # endif()
+    set(KF6_DIR "${CMAKE_PREFIX_PATH}")
+    # set(KF5_DIR "${CMAKE_PREFIX_PATH}")
+    # set(KF${KF_VERSION_MAJOR}_DIR "${CMAKE_PREFIX_PATH}")
+    foreach(DEPENDENCY_PATH ${DEPENDENCIES})
+        string(SUBSTRING ${DEPENDENCY_PATH} 9 -1 DEPENDENCY)
+        set(DEPENDENCY_COPY "${CMAKE_CURRENT_BINARY_DIR}/${DEPENDENCY}")
+        file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/${DEPENDENCY_PATH}" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+        file(MAKE_DIRECTORY "${DEPENDENCY_COPY}/build")
+        exec_program(cmake ${DEPENDENCY_COPY} ARGS -B build -DCMAKE_CONFIGURATION_TYPES=${CMAKE_BUILD_TYPE}
+            -DCMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}" -DQT_MAJOR_VERSION=6 -DBUILD_WITH_QT6=ON
+            -DEXCLUDE_DEPRECATED_BEFORE_AND_AT=5.91.0 -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"
+            -DCMAKE_INSTALL_PREFIX="${CMAKE_PREFIX_PATH}"
+        )
+        exec_program(cmake "${DEPENDENCY_COPY}/build"
+            ARGS --build .
+        )
+        exec_program(cmake "${DEPENDENCY_COPY}/build"
+            ARGS --install .
+        )
+    endforeach()
+endif()
 
 # C++ Dependencies
 
