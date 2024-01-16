@@ -9,4 +9,4 @@
 	url = https://github.com/KDAB/KDMacTouchBar.git
 [submodule "3rdparty/vcpkg"]
 	path = 3rdparty/vcpkg
-	url = https://github.com/microsoft/vcpkg.git
+	url = https://github.com/Cuperino/vcpkg.git
