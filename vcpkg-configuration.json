@@ -1,7 +1,7 @@
 {
   "default-registry": {
     "kind": "git",
-    "baseline": "ba21df999e705bab81e68e9785e495d5f7d30710",
+    "baseline": "4f03ddf3a7c62a410e90a6ed3d55831b22482342",
     "repository": "https://github.com/Cuperino/vcpkg"
   }
 }
