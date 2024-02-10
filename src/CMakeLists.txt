@@ -1,7 +1,7 @@
 #**************************************************************************
 #
 # QPrompt
-# Copyright (C) 2020-2023 Javier O. Cordero Pérez
+# Copyright (C) 2020-2024 Javier O. Cordero Pérez
 #
 # This file is part of QPrompt.
 #
@@ -228,7 +228,7 @@ elseif(WIN32 OR APPLE)
 else()
     #target_include_directories(${PROJECT_NAME} PUBLIC ${qhotkey_SOURCE_DIR}/QHotkey)
     #target_link_directories(${PROJECT_NAME} PUBLIC ${qhotkey_SOURCE_DIR}/QHotkey)
-    target_link_libraries(${PROJECT_NAME} PUBLIC
+    target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Quick
         Qt${QT_VERSION_MAJOR}::Gui

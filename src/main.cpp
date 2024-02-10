@@ -37,11 +37,10 @@
 #include <QUrl>
 #include <QtQml/qqml.h>
 #include <QtQml>
-//#include "appwindow.h"
 
-#if defined(Q_OS_IOS) || defined(Q_OS_WASM) || defined(Q_OS_WATCHOS) || defined(Q_OS_QNX)
+// #if defined(Q_OS_IOS) || defined(Q_OS_WASM) || defined(Q_OS_WATCHOS) || defined(Q_OS_QNX)
 #include "../3rdparty/kirigami/src/kirigamiplugin.h"
-#endif
+// #endif
 #include <KLocalizedContext>
 #include <KLocalizedString>
 #include <kaboutdata.h>

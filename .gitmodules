@@ -10,3 +10,6 @@
 [submodule "3rdparty/vcpkg"]
 	path = 3rdparty/vcpkg
 	url = https://github.com/microsoft/vcpkg.git
+[submodule "3rdparty/kirigami"]
+	path = 3rdparty/kirigami
+	url = https://github.com/QPrompt/kirigami.git

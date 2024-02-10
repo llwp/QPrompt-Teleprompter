@@ -1,7 +1,7 @@
 #**************************************************************************
 #
 # QPrompt
-# Copyright (C) 2020-2022 Javier O. Cordero Pérez
+# Copyright (C) 2020-2024 Javier O. Cordero Pérez
 #
 # This file is part of QPrompt.
 #
@@ -105,7 +105,7 @@ endif()
 # Send compiled program and library binaries to "build/bin"
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
 
@@ -244,7 +244,7 @@ else()
         #QuickCompiler
     #)
     find_package(KF${QT_VERSION_MAJOR} ${KF_MIN_VERSION} REQUIRED COMPONENTS
-        Kirigami2
+        # Kirigami2
         I18n
         CoreAddons
         IconThemes
@@ -260,22 +260,22 @@ else()
 endif()
 
 if (WIN32 OR UNIX) # AND NOT ANDROID
-    include(KDEInstallDirs)
-    include(KDECMakeSettings)
     include(ECMInstallIcons)
     include(ECMAddAppIcon)
     include(ECMGenerateHeaders)
 endif()
-include(KDECompilerSettings NO_POLICY_SCOPE)
-include(KDEClangFormat)
 include(ECMQtDeclareLoggingCategory)
 include(ECMSetupVersion)
 include(ECMSourceVersionControl)
 include(ECMPoQmTools)
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDEClangFormat)
 include(FeatureSummary)
 
 #add_subdirectory("3rdparty/extra-cmake-modules" build/ecm)
-#add_subdirectory("3rdparty/kirigami" build/kirigami)
+add_subdirectory("3rdparty/kirigami" build/kirigami)
 #add_subdirectory("3rdparty/ki18n" build/ki18n)
 #add_subdirectory("3rdparty/breeze-icons" build/icons)
 #add_subdirectory("3rdparty/calligra/filters/libmsooxml" build/libmsooxml)
