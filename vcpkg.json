@@ -44,8 +44,7 @@
     },
     {
       "name": "ecm",
-      "version>=": "5.98.0",
-      "host": true
+      "version>=": "5.98.0"
     },
     {
       "name": "kf5coreaddons",
@@ -71,6 +70,5 @@
       "name": "kf5config",
       "version>=": "5.98.0"
     }
-  ],
-  "builtin-baseline": "01acfdfde3ed99280d3883a8fccd5fa4408f5214"
+  ]
 }
