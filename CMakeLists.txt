@@ -275,6 +275,7 @@ include(KDEClangFormat)
 include(FeatureSummary)
 
 #add_subdirectory("3rdparty/extra-cmake-modules" build/ecm)
+set(BUILD_SHARED_LIBS OFF)
 add_subdirectory("3rdparty/kirigami" build/kirigami)
 #add_subdirectory("3rdparty/ki18n" build/ki18n)
 #add_subdirectory("3rdparty/breeze-icons" build/icons)

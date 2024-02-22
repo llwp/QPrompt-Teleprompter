@@ -1,7 +1,7 @@
 /****************************************************************************
  **
  ** QPrompt
- ** Copyright (C) 2020-2023 Javier O. Cordero Pérez
+ ** Copyright (C) 2020-2024 Javier O. Cordero Pérez
  **
  ** This file is part of QPrompt.
  **
@@ -19,15 +19,14 @@
  **
  ****************************************************************************/
 
-import QtQuick 2.12
-import org.kde.kirigami 2.11 as Kirigami
-import QtQuick.Controls 2.12
-import QtQuick.Window 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Controls.Material 2.12
+import org.kde.kirigami 2.15 as Kirigami
+import QtQuick.Controls 2.15
+import QtQuick.Window 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls.Material 2.15
 import Qt.labs.platform 1.1 as Labs
-//import QtQuick.Dialogs 1.3
-import Qt.labs.settings 1.0
+//import QtQuick.Dialogs 1.5
+import Qt.labs.settings 1.5
 
 import com.cuperino.qprompt.document 1.0
 import com.cuperino.qprompt.qmlutil 1.0
